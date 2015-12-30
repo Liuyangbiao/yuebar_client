@@ -1,0 +1,503 @@
+package com.fullteem.yueba.app.ui;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.List;
+import java.util.Map;
+
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnCancelListener;
+import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
+import android.text.TextUtils;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import com.alibaba.fastjson.JSONObject;
+import com.baidu.location.BDLocation;
+import com.easemob.EMCallBack;
+import com.easemob.chat.EMChatManager;
+import com.easemob.chat.EMContactManager;
+import com.easemob.chat.EMConversation;
+import com.easemob.chat.EMGroupManager;
+import com.easemob.exceptions.EaseMobException;
+import com.easemob.util.EMLog;
+import com.easemob.util.HanziToPinyin;
+import com.fullteem.yueba.R;
+import com.fullteem.yueba.db.UserDao;
+import com.fullteem.yueba.globle.GlobleConstant;
+import com.fullteem.yueba.globle.GlobleVariable;
+import com.fullteem.yueba.model.CommonModel;
+import com.fullteem.yueba.model.LoginModel;
+import com.fullteem.yueba.model.User;
+import com.fullteem.yueba.net.Urls;
+import com.fullteem.yueba.net.http.AsyncHttpResponseHandler;
+import com.fullteem.yueba.net.http.HttpRequestFactory;
+import com.fullteem.yueba.net.md5.MD5Util;
+import com.fullteem.yueba.util.BaiduMapUtil;
+import com.fullteem.yueba.util.CheckUtil;
+import com.fullteem.yueba.util.EncryptUtil;
+import com.fullteem.yueba.util.JsonUtil;
+import com.fullteem.yueba.util.LogUtil;
+
+/**
+ * @author ssy 登陆页面，本页面主要完成登陆逻辑
+ */
+public class LoginActivity extends BaseActivity implements OnClickListener {
+    private CheckBox checkBoxRemeberPsd;
+    private Button btnLogin;
+    private TextView btnRegister;
+    private TextView btnForgetPsd;
+    private Button btnQQ, btnSina, btnWeixin;
+    
+    /**
+     * 登陆账号密码
+     */
+    private EditText edtUserName, edtPsd;
+    private boolean progressShow;
+    
+    public LoginActivity() {
+        super(R.layout.activity_login_main);
+    }
+    
+    @Override
+    public void initViews() {
+        btnLogin = (Button) findViewById(R.id.loginBtn);
+        checkBoxRemeberPsd = (CheckBox) findViewById(R.id.loginCheckBox);
+        btnRegister = (TextView) findViewById(R.id.register);
+        btnForgetPsd = (TextView) findViewById(R.id.forgetpsd);
+        btnQQ = (Button) findViewById(R.id.btnQQ);
+        btnSina = (Button) findViewById(R.id.btnSina);
+        btnWeixin = (Button) findViewById(R.id.btnWeixin);
+        edtUserName = (EditText) findViewById(R.id.edtUsraccount);
+        edtPsd = (EditText) findViewById(R.id.edtPsd);
+    }
+    
+    @Override
+    public void initData() {
+    }
+    
+    @Override
+    public void bindViews() {
+        btnLogin.setOnClickListener(this);
+        btnRegister.setOnClickListener(this);
+        btnForgetPsd.setOnClickListener(this);
+        btnQQ.setOnClickListener(this);
+        btnSina.setOnClickListener(this);
+        btnWeixin.setOnClickListener(this);
+        
+        // 若上一次登陆成功且记住过密码
+        if (!TextUtils.isEmpty(appContext.getLocalUserName())
+            && !TextUtils.isEmpty(appContext.getLocalPsd())) {
+            edtUserName.setText(appContext.getLocalUserName());
+            edtPsd.setText(EncryptUtil.decrypt(appContext.getLocalPsd()));
+        }
+    }
+    
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.loginBtn:
+                if (GlobleVariable.isDebug) {
+                    // 开始定位
+                    // showLoadingDialog();
+                    LogUtil.LogDebug(getClass().getName(), "login btn is clicked！", null);
+                    new BaiduMapUtil(LoginActivity.this,
+                                     new BaiduMapUtil.IGetLocation() {
+                        @Override
+                        public void getlocation(BDLocation lastLocation) {
+                            LogUtil.LogDebug(getClass().getName(), "login btn is clicked！", null);
+                            System.out
+                            .println("on get location successful");
+                            appContext.setLocation(lastLocation);
+                            startLogin();
+                        }
+                    });
+                } else {
+                    Intent intent = new Intent(LoginActivity.this,
+                                               MainActivity.class);
+                    startActivity(intent);
+                }
+                break;
+            case R.id.register:
+                Intent registerIntent = new Intent(LoginActivity.this,
+                                                   RegisterActivity.class);
+                startActivity(registerIntent);
+                break;
+            case R.id.forgetpsd:
+                Intent forgetIntent = new Intent(LoginActivity.this,
+                                                 ForgetActivity.class);
+                startActivity(forgetIntent);
+                break;
+            case R.id.btnQQ:
+                break;
+            case R.id.btnSina:
+                break;
+            case R.id.btnWeixin:
+                break;
+                
+            default:
+                break;
+        }
+        
+    }
+    
+    /**
+     * 开始登录流程
+     */
+    private void startLogin() {
+        System.out.println("start login process");
+        final String username = edtUserName.getText().toString();
+        final String password = edtPsd.getText().toString();
+        System.out.println("username：" + username + "   psd:" + password);
+        
+        if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(password)) {
+            if (!CheckUtil.checkUserName(username)){
+                showToast(getString(R.string.string_please_input_right_user));
+                return;
+            }
+            if(!Urls.TEST_MODE)
+            if (!CheckUtil.checkUserPassword(password)){
+                showToast(getString(R.string.string_please_input_right_psd));
+                return;
+            }
+            
+            final ProgressDialog pd = new ProgressDialog(LoginActivity.this);
+            pd.setCanceledOnTouchOutside(false);
+            pd.setOnCancelListener(new OnCancelListener() {
+                @Override
+                public void onCancel(DialogInterface dialog) {
+                    progressShow = false;
+                }
+            });
+            
+            doSelfLogin(username, password, pd);
+        } else {
+            if (TextUtils.isEmpty(username) && TextUtils.isEmpty(password)) {
+                showToast(getString(R.string.string_please_inputuserpsd));
+                return;
+            }
+            if (TextUtils.isEmpty(username)) {
+                showToast(getString(R.string.string_please_inputuser));
+                return;
+            }
+            if (TextUtils.isEmpty(password)) {
+                showToast(getString(R.string.string_please_inputpsd));
+                return;
+            }
+        }
+    }
+    
+    /**
+     * 做本地服务器登陆
+     */
+    private void doSelfLogin(final String username, final String password,
+                             final ProgressDialog pd) {
+        System.out.println("start self login");
+        LogUtil.LogDebug(getClass().getName(), "login btn is clicked！", null);
+        pd.setMessage("正在登陆...");
+        pd.show();
+        progressShow = true;
+        
+        JSONObject ob = new JSONObject();
+        if(!Urls.TEST_MODE)
+        ob.put("userMobileOrAccount", username);
+        else 
+        	 ob.put("userMobile", username);
+        ob.put("userPassword", MD5Util.string2MD5(password));
+        ob.put("lng", appContext.getLocation().getLongitude());
+        ob.put("lat", appContext.getLocation().getLatitude());
+        HttpRequestFactory.getInstance().getRequest(Urls.login_action, ob,
+                                                    new AsyncHttpResponseHandler() {
+            @Override
+            public void onStart() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        showLoadingDialog();
+                    }
+                });
+            }
+            
+            @Override
+            public void onSuccess(String content) {
+                LogUtil.LogDebug(getClass().getName(), "login btn is clicked！", null);
+                System.out.println("self login succeed");
+                System.out.println(content);
+                
+                super.onSuccess(content);
+                
+                LoginModel lm = new LoginModel();
+                lm = JsonUtil.convertJsonToObject(content,
+                                                  LoginModel.class);
+                if(lm==null)
+                {
+                	 showToastInThread(getString(R.string.login_fail));
+                     dismissLoadingDialog();
+                     pd.dismiss();
+                     return ;
+                }
+                
+                if (lm != null && lm.getCode() != null
+                    && GlobleConstant.REQUEST_SUCCESS
+                    .equalsIgnoreCase(lm.getCode())) {
+                    LogUtil.LogDebug(getClass().getName(), "login btn is clicked！", null);
+                    System.out.println("code is right");
+                    appContext.setUserInfo(lm.getResult());
+                    // 切换用户清空之前保存的用户名密码
+                    if (!username.equalsIgnoreCase(appContext
+                                                   .getLocalUserName())) {
+                        appContext.clearData();
+                    }
+                    // 登陆成功，保存用户名密码
+                    if (checkBoxRemeberPsd.isChecked()) {
+                        appContext.setLocalPsd(EncryptUtil.encrypt(password));
+                        appContext.setLocalUserName(username);
+                    } else {
+                        appContext.clearData();
+                    }
+                    
+                    // 服务器端登录
+                    if(!Urls.TEST_MODE)
+                    doIMServerLogin(appContext.getUserInfo()
+                                    .getImServerId(), appContext.getUserInfo()
+                                    .getImServerPwd(), pd);
+                    else 
+                    	  doIMServerLogin(username, MD5Util.string2MD5(password),pd);
+						
+                } else {
+                    System.out.println("self login succeed but code is not right");
+                    LogUtil.LogDebug(getClass().getName(), "login btn is clicked！", null);
+                    
+                    dismissPd(pd);
+                    showToastInThread(getString(R.string.login_fail));
+                }
+            }
+            
+            @Override
+            public void onFailure(Throwable error, String content) {
+                LogUtil.LogDebug(getClass().getName(), "login btn is clicked！", null);
+                System.out.println("self login failed");
+                super.onFailure(error, content);
+                
+                dismissPd(pd);
+                
+                showToastInThread(getString(R.string.login_fail));
+            }
+            
+			public void onFinish() {
+				dismissLoadingDialog();
+				LogUtil.LogDebug(getClass().getName(), "doSelfLogin finished", null);
+
+			}
+        });
+    }
+    
+    /**
+     * 登陆环信流程
+     */
+    private void doIMServerLogin(final String username, final String password,
+                                 final ProgressDialog pd) {
+        LogUtil.LogDebug(getClass().getName(), "start IM server login", null);
+        // 调用sdk登陆方法登陆聊天服务器
+        EMChatManager.getInstance().login(username, password, new EMCallBack() {
+            
+            @Override
+            public void onSuccess() {
+                LogUtil.LogDebug(getClass().getName(), "IM server login succeed", null);
+                
+                if (!progressShow) {
+                    return;
+                }
+                
+                // 保存服务器端登录的用户名和密码--只保存在内存中
+                appContext.setUserName(username);
+                appContext.setPassword(password);
+                
+                Hashtable<String, EMConversation> conversations = EMChatManager
+                .getInstance().getAllConversations();
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        pd.setMessage("正在获取好友和群聊列表...");
+                    }
+                });
+                try {
+                    handleIMServerLoginLogin();
+                } catch (Exception e) {
+                    System.out.println("获取过程中出现问题:" + e);
+                }
+                
+                dismissPd(pd);
+                
+                finishLogin();
+            }
+            
+            @Override
+            public void onError(int arg0, String arg1) {
+                System.out.println(arg1);
+                dismissPd(pd);
+                
+                Message msg = new Message();
+                msg.obj = arg1;
+                showMsgHandler.sendMessage(msg);
+                dismissLoadingDialog();
+            }
+            
+            @Override
+            public void onProgress(int arg0, String arg1) {
+                System.out.println(arg1);
+                dismissPd(pd);
+                
+                Message msg = new Message();
+                msg.obj = arg1;
+                showMsgHandler.sendMessage(msg);
+                dismissLoadingDialog();
+            }
+            
+        });
+        
+    }
+    
+    private void dismissPd(final ProgressDialog pd){
+        if (pd != null && !LoginActivity.this.isFinishing()) {
+            pd.dismiss();
+            progressShow = false;
+        }
+    }
+    
+    private void handleIMServerLoginLogin() throws EaseMobException {
+        LogUtil.LogDebug(getClass().getName(), "handle IM server login", null);
+        
+        // ** 第一次登录或者之前logout后，加载所有本地群和回话
+        // ** manually load all local groups and
+        // conversations in case we are auto login
+        EMGroupManager.getInstance().loadAllGroups();
+        EMChatManager.getInstance().loadAllConversations();
+        
+        // 每次登陆都去获取好友username
+        List<String> usernames = EMContactManager.getInstance()
+        .getContactUserNames();
+        EMLog.d("roster", "contacts size: " + usernames.size());
+        Map<String, User> userlist = new HashMap<String, User>();
+        for (String username : usernames) {
+            User user = new User();
+            user.setUsername(username);
+            setUserHearder(username, user);
+            userlist.put(username, user);
+        }
+        // 添加user"申请与通知"
+        User newFriends = new User();
+        newFriends.setUsername(GlobleConstant.NEW_FRIENDS_USERNAME);
+        newFriends.setNick("申请与通知");
+        newFriends.setHeader("");
+        userlist.put(GlobleConstant.NEW_FRIENDS_USERNAME, newFriends);
+        // 添加"群聊"
+        User groupUser = new User();
+        groupUser.setUsername(GlobleConstant.GROUP_USERNAME);
+        groupUser.setNick("群聊");
+        groupUser.setHeader("");
+        userlist.put(GlobleConstant.GROUP_USERNAME, groupUser);
+        
+        // 存入内存
+        appContext.setContactList(userlist);
+        // 存入db
+        UserDao dao = new UserDao(LoginActivity.this);
+        List<User> users = new ArrayList<User>(userlist.values());
+        dao.saveContactList(users);
+        
+        // 获取群聊列表(群聊里只有groupid和groupname的简单信息),sdk会把群组存入到内存和db中
+        EMGroupManager.getInstance().getGroupsFromServer();
+        
+        boolean updatenick = EMChatManager.getInstance().updateCurrentUserNick(
+                                                                               appContext.currentUserNick);
+        if (!updatenick) {
+            EMLog.e("LoginActivity", "update current user nick fail");
+        }
+    }
+    
+    private void finishLogin() {
+        LogUtil.LogDebug(getClass().getName(), "finish login", null);
+        showToastInThread(getString(R.string.login_success));
+        
+        // 进入主页面
+        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+        
+        finish();
+        dismissLoadingDialog();
+    }
+    
+    private void updateLocation() {
+        // 发送定位请求
+        JSONObject ob = new JSONObject();
+        ob.put("userId", appContext.getUserInfo().getUserId());
+        ob.put("lng", appContext.getLocation().getLongitude());
+        ob.put("lat", appContext.getLocation().getLatitude());
+        
+        // 插入定位请求
+        HttpRequestFactory.getInstance().getRequest(Urls.location_acation, ob,
+                                                    new AsyncHttpResponseHandler() {
+            
+            public void onSuccess(String content) {
+                System.out.println(content);
+                CommonModel cm = new CommonModel();
+                cm = JsonUtil.convertJsonToObject(content,
+                                                  CommonModel.class);
+                
+                if (cm.getCode() != null
+                    && GlobleConstant.REQUEST_SUCCESS
+                    .equalsIgnoreCase(cm.getCode())) {
+                    
+                    // success to update location
+                    
+                } else {
+                    showToastInThread(getString(R.string.location_error));
+                }
+                
+            };
+            
+            public void onFinish() {
+            };
+        });
+    }
+    
+    /**
+     * 设置hearder属性，方便通讯中对联系人按header分类显示，以及通过右侧ABCD...字母栏快速定位联系人
+     * 
+     * @param username
+     * @param user
+     */
+    protected void setUserHearder(String username, User user) {
+        String headerName = null;
+        if (!TextUtils.isEmpty(user.getNick())) {
+            headerName = user.getNick();
+        } else {
+            headerName = user.getUsername();
+        }
+        if (username.equals(GlobleConstant.NEW_FRIENDS_USERNAME)) {
+            user.setHeader("");
+        } else if (Character.isDigit(headerName.charAt(0))) {
+            user.setHeader("#");
+        } else {
+            user.setHeader(HanziToPinyin.getInstance()
+                           .get(headerName.substring(0, 1)).get(0).target.substring(0,
+                                                                                    1).toUpperCase());
+            char header = user.getHeader().toLowerCase().charAt(0);
+            if (header < 'a' || header > 'z') {
+                user.setHeader("#");
+            }
+        }
+    }
+    
+    Handler showMsgHandler = new Handler() {
+        public void handleMessage(android.os.Message msg) {
+            showToast(msg.obj.toString());
+        };
+    };
+}

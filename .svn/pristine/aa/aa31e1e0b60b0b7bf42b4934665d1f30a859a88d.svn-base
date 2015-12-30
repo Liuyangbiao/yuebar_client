@@ -1,0 +1,409 @@
+package com.fullteem.yueba.app.ui;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.LayoutParams;
+import android.text.TextUtils;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.fullteem.yueba.R;
+import com.fullteem.yueba.app.AppContext;
+import com.fullteem.yueba.app.adapter.PicAdapter;
+import com.fullteem.yueba.app.adapter.PubPackageAdapter;
+import com.fullteem.yueba.app.adapter.PubSingerAdapter;
+import com.fullteem.yueba.globle.GlobleConstant;
+import com.fullteem.yueba.model.PicModle;
+import com.fullteem.yueba.model.PubModel;
+import com.fullteem.yueba.model.PubPackageModel;
+import com.fullteem.yueba.model.ResponeModel;
+import com.fullteem.yueba.model.SingerModel;
+import com.fullteem.yueba.net.http.CustomAsyncResponehandler;
+import com.fullteem.yueba.net.http.HttpRequest;
+import com.fullteem.yueba.util.DisplayUtils;
+import com.fullteem.yueba.util.ImageLoaderUtil;
+import com.fullteem.yueba.widget.ChildViewPager;
+import com.fullteem.yueba.widget.InScrollListView;
+import com.fullteem.yueba.widget.TopTitleView;
+
+/**
+ * 酒吧详情
+ * 
+ * @author ssy
+ * 
+ */
+public class PubDetailsActivity extends BaseActivity {
+	private InScrollListView lvPubEnvironment, lvSinger, lvSales, lvSelectPackage;
+	private PicAdapter pubEnvironmentAdapter, salesAdapter;
+	private PubSingerAdapter adapterSinger;
+	private PubPackageAdapter adapterPackage;
+	private List<PicModle> listPubEnvironment, listSales;
+	private List<SingerModel> listSinger;
+	private List<PubPackageModel> listPubPackage;
+	private ImageView ivPubHeader;
+	private CheckBox ckbHeart;
+	private TextView pubName, tvAddress, tvPhoneNum, tvDetail;
+	//	private Button btnPubType, btnRegularSinger;
+	private LinearLayout llPubEnvironment, llPubSinger, llPubSales, llSelectPackage;
+	private LinearLayout llsetAddress;
+
+	private String pubNameStr;// 酒吧名,发布约会传回去
+	private int barId;//酒id,发布约会传回去
+	private boolean isFollow;
+
+	private boolean isBack;
+	//test data
+	private ChildViewPager mPubEnvironment;
+	private List<ImageView> mPubEnvironmentList;
+//	private InnerHandler mHandler;
+	private PubEnvironmentAdapter pubAdapter;
+
+	public PubDetailsActivity() {
+		super(R.layout.activity_pubdetail);
+	}
+
+	@Override
+	public void initViews() {
+		// for title
+		TopTitleView topTitle = (TopTitleView) findViewById(R.id.toptile);
+		topTitle.showLeftImag(R.drawable.back, new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
+		topTitle.showCenterText(getString(R.string.pub_stroll), null);
+
+		// for body
+//		lvPubEnvironment = (InScrollListView) findViewById(R.id.lvPubEnvironment);
+		mPubEnvironment = (ChildViewPager) findViewById(R.id.vp_pub_environment);
+		lvSinger = (InScrollListView) findViewById(R.id.lvSinger);
+		lvSales = (InScrollListView) findViewById(R.id.lvSales);
+		lvSelectPackage = (InScrollListView) findViewById(R.id.lvSelectPackage);
+
+		ivPubHeader = (ImageView) findViewById(R.id.ivPubHeader);
+		ckbHeart = (CheckBox) findViewById(R.id.ckbHeart);
+		pubName = (TextView) findViewById(R.id.pubName);
+		tvAddress = (TextView) findViewById(R.id.tvAddress);
+		tvPhoneNum = (TextView) findViewById(R.id.tvPhoneNum);
+		tvDetail = (TextView) findViewById(R.id.tvDetail);
+		//		btnPubType = (Button) findViewById(R.id.btn_pubType);
+		//		btnRegularSinger = (Button) findViewById(R.id.btn_regularSinger);
+
+		llPubEnvironment = (LinearLayout) findViewById(R.id.llPubEnvironment);
+		llPubSinger = (LinearLayout) findViewById(R.id.llPubSinger);
+		llPubSales = (LinearLayout) findViewById(R.id.llPubSales);
+		llSelectPackage = (LinearLayout) findViewById(R.id.llSelectPackage);
+
+		llsetAddress = (LinearLayout) findViewById(R.id.llsetAddress);
+		llsetAddress.setVisibility(getIntent().getBooleanExtra(GlobleConstant.ACTION_ADDRESS, false) ? View.VISIBLE : View.GONE);
+	}
+
+	@Override
+	public void initData() {
+		
+		if (!isBack)
+			loadData(barId = getIntent().getIntExtra(GlobleConstant.PUB_ID, -1));
+
+//		lvPubEnvironment.setAdapter(pubEnvironmentAdapter = pubEnvironmentAdapter == null ? new PicAdapter(
+//				listPubEnvironment = listPubEnvironment == null ? new ArrayList<PicModle>() : listPubEnvironment) : pubEnvironmentAdapter);
+		lvSinger.setAdapter(adapterSinger = adapterSinger == null ? new PubSingerAdapter(PubDetailsActivity.this, listSinger = listSinger == null ? new ArrayList<SingerModel>()
+				: listSinger) : adapterSinger);
+		lvSales.setAdapter(salesAdapter = salesAdapter == null ? new PicAdapter(listSales = listSales == null ? new ArrayList<PicModle>() : listSales) : salesAdapter);
+		lvSelectPackage.setAdapter(adapterPackage = adapterPackage == null ? new PubPackageAdapter(PubDetailsActivity.this,
+				listPubPackage = listPubPackage == null ? new ArrayList<PubPackageModel>() : listPubPackage) : adapterPackage);
+		/*================================测试数据=========================================*/
+		/*int[] imageResIDs = {
+				R.drawable.image1,
+				R.drawable.image2,
+				R.drawable.image3,
+				R.drawable.image4,
+		};
+		
+		mPubEnvironmentList = new ArrayList<ImageView>();
+		ImageView iv;
+		
+		for (int i = 0; i < imageResIDs.length; i++) {
+			iv = new ImageView(this);
+			iv.setBackgroundResource(imageResIDs[i]);
+			mPubEnvironmentList.add(iv);
+		}
+		int item = Integer.MAX_VALUE / 2 - ((Integer.MAX_VALUE / 2) % mPubEnvironmentList.size());
+    	mPubEnvironment.setCurrentItem(item);*/
+		/*================================测试数据=========================================*/
+		listPubEnvironment = new ArrayList<PicModle>();
+		pubAdapter = new PubEnvironmentAdapter();
+		mPubEnvironment.setAdapter(pubAdapter = pubAdapter == null ? new PubEnvironmentAdapter():pubAdapter);
+		
+		// listPubEnvironment = new ArrayList<PicModle>();
+		// listSinger = new ArrayList<SingerModel>();
+		// listSales = new ArrayList<PicModle>();
+		// listPubPackage = new ArrayList<PubPackageModel>();
+		//
+		// // --------------------------examples data--------------------------
+		//
+		// PicModle picModel = new PicModle();
+		// picModel.setPicUrl("http:");
+		// listPubEnvironment.add(picModel);
+		//
+		// int dataTotal = new Random().nextInt(10);
+		// for (int i = 0; i < dataTotal; i++) {
+		// // SingerModel singerModel = new SingerModel();
+		// // singerModel.setUserNickname(getString(R.string.name_normal));
+		// // singerModel.setUserHeader("drawable://" +
+		// // R.drawable.ico_loginmain_sina);
+		// //
+		// singerModel.setIntroduction(getString(R.string.app_error_message));
+		// // listSinger.add(singerModel);
+		//
+		// PubPackageModel packageModel = new PubPackageModel();
+		// packageModel.setOrderName(getString(R.string.pubpackage_normal));
+		// packageModel.setPackageCOntent(getString(R.string.records_content_normal));
+		// packageModel.setOrderPrice("300");
+		// listPubPackage.add(packageModel);
+		// }
+		//
+		// pubEnvironmentAdapter = new PicAdapter(PubDetailsActivity.this,
+		// listPubEnvironment);
+		// adapterSinger = new PubSingerAdapter(PubDetailsActivity.this,
+		// listSinger);
+		// salesAdapter = new PicAdapter(PubDetailsActivity.this,
+		// listPubEnvironment);
+		// adapterPackage = new PubPackageAdapter(PubDetailsActivity.this,
+		// listPubPackage);
+		// lvPubEnvironment.setAdapter(pubEnvironmentAdapter);
+		// lvSinger.setAdapter(adapterSinger);
+		// lvSales.setAdapter(salesAdapter);
+		// lvSelectPackage.setAdapter(adapterPackage);
+
+		// --------------------------examples data--------------------------
+	}
+	/*================================修改酒吧环境图片为轮播图=========================================*/
+	class PubEnvironmentAdapter extends PagerAdapter{
+
+		@Override
+		public int getCount() {
+//			return Integer.MAX_VALUE;
+			return listPubEnvironment.size();
+		}
+
+		@Override
+		public boolean isViewFromObject(View arg0, Object arg1) {
+			return arg0 == arg1;
+		}
+
+		@Override
+		public void destroyItem(ViewGroup container, int position, Object object) {
+			container.removeView((View)object);
+		}
+
+		@Override
+		public Object instantiateItem(ViewGroup container, int position) {
+			//通过图片url显示酒吧环境图片
+			ImageView imageView = new ImageView(context);
+			String barImgUrl = listPubEnvironment.get(position).getBarImgUrl();
+			ImageLoaderUtil.getImageLoader().displayImage(DisplayUtils.getAbsolutelyUrl(barImgUrl), imageView);
+			container.addView(imageView);
+			return imageView;
+//			ImageView iv = mPubEnvironmentList.get(position % mPubEnvironmentList.size());
+//			container.addView(iv);
+//			return iv;
+		}
+	}
+	/*================================修改酒吧环境图片为轮播图=========================================*/
+	@Override
+	public void bindViews() {
+		llsetAddress.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				ImageView iv = (ImageView) findViewById(R.id.ivSetAddress);
+				iv.setBackgroundResource(R.drawable.icon_date_pressed);
+				DisplayUtils.resetBack(iv, R.drawable.icon_date);
+
+				if (TextUtils.isEmpty(pubNameStr)) {
+					showToast(getString(R.string.hint_pubDateLoading));
+					return;
+				}
+				Intent intent = new Intent();
+				intent.putExtra(GlobleConstant.ACTION_ADDRESS, pubNameStr);
+				intent.putExtra(GlobleConstant.PUB_ID, barId);
+				setResult(GlobleConstant.ACTION_ADDRESS_CODE, intent);
+				finish();
+			}
+		});
+
+		ckbHeart.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Integer userId = Integer.valueOf(AppContext.getApplication().getUserInfo().getUserId());
+				if (userId == null || userId <= -1)
+					return;
+				if (TextUtils.isEmpty(pubNameStr)) {
+					ckbHeart.setChecked(!ckbHeart.isChecked());
+					showToast(getString(R.string.hint_pubDateLoading));
+					return;
+				}
+
+				HttpRequest.getInstance(PubDetailsActivity.this).operateFollow(1, barId, userId, null, null, isFollow, new CustomAsyncResponehandler() {
+
+					@Override
+					public void onSuccess(ResponeModel baseModel) {
+						if (baseModel != null && baseModel.isStatus())
+							loadData(barId);
+						else {
+							ckbHeart.setChecked(!ckbHeart.isChecked());
+							showToast(getString(R.string.hint_operationError));
+						}
+					}
+
+					@Override
+					public void onFailure(Throwable error, String content) {
+						ckbHeart.setChecked(!ckbHeart.isChecked());
+						showToast(getString(R.string.hint_operationError));
+					}
+				});
+
+			}
+		});
+	}
+
+	/**
+	 * 从服务器获取数据
+	 */
+	private void loadData(int barId) {
+		if (isBack)
+			return;
+		Integer userId = Integer.valueOf(AppContext.getApplication().getUserInfo().getUserId());
+		if (barId == -1 || userId == null) {
+			showToast(getString(R.string.hint_getPubDetailError));
+			finish();
+		}
+		HttpRequest.getInstance(PubDetailsActivity.this).getPubDetait(barId, userId, new CustomAsyncResponehandler() {
+			@Override
+			public void onSuccess(ResponeModel baseModel) {
+				if (baseModel == null || baseModel.getResultObject() == null || baseModel.getDataResult() == null) {
+					showToast(getString(R.string.hint_getPubDetailError));
+					return;
+				}
+
+				// 酒吧数据
+				final PubModel pubModel = (PubModel) baseModel.getObject("barMap", PubModel.class);
+				ImageLoaderUtil.getImageLoader().displayImage(DisplayUtils.getAbsolutelyUrl(pubModel.getBarLogoUrl()), ivPubHeader,
+						ImageLoaderUtil.getOptions(R.drawable.img_loading_default_copy, R.drawable.img_loading_empty_copy, R.drawable.img_loading_fail_copy));
+				pubName.setText(pubNameStr = pubModel.getBarName());
+				tvAddress.setText(pubModel.getBarAddress());
+				tvPhoneNum.setText(pubModel.getBarTelephone());
+				tvDetail.setText(pubModel.getBarIntroduction());
+
+				tvPhoneNum.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						Intent callIntent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + pubModel.getBarTelephone()));
+						startActivity(callIntent);
+					}
+				});
+
+				String isFollowStr = baseModel.getTreeInResult("isAttention");
+				pubModel.setIsFollow(isFollow = "true".equals(isFollowStr));
+
+				ckbHeart.setChecked(isFollow);
+
+				if (pubModel.isSingingBar())
+					findViewById(R.id.ivSingingBar).setVisibility(View.VISIBLE);
+				Integer barTypeRes = pubModel.getBarType() == 1 ? R.drawable.img_pub_type1 : pubModel.getBarType() == 2 ? R.drawable.img_pub_type2
+						: pubModel.getBarType() == 3 ? R.drawable.img_pub_type3 : null;//1、清吧；2摇滚、3演绎
+				if (barTypeRes != null) {
+					ImageView ivBarType = (ImageView) findViewById(R.id.ivBarType);
+					ivBarType.setBackgroundResource(barTypeRes);
+					ivBarType.setVisibility(View.VISIBLE);
+				}
+
+				// 酒吧环境，图
+				List<PicModle> barPics = ((List<PicModle>) baseModel.getListObject("barPhotoList", PicModle.class));
+				System.out.println("barPics长度："+barPics.size());
+				if (barPics == null || barPics.size() <= 0 || barPics.get(0) == null) {
+					llPubEnvironment.setVisibility(View.GONE);
+//					pubEnvironmentAdapter = null;
+					pubAdapter = null;
+//					listPubEnvironment = null;
+				} else {
+					if (!listPubEnvironment.isEmpty())
+						listPubEnvironment.clear();
+					listPubEnvironment.addAll(barPics);
+//					pubEnvironmentAdapter.notifyDataSetChanged();
+					pubAdapter.notifyDataSetChanged();
+				}
+
+				// 酒吧驻唱歌手
+				List<SingerModel> barSingers = ((List<SingerModel>) baseModel.getListObject("barSingerList", SingerModel.class));
+				if (barSingers == null || barSingers.size() <= 0 || barSingers.get(0) == null) {
+					llPubSinger.setVisibility(View.GONE);
+					adapterSinger = null;
+					listSinger = null;
+				} else {
+					if (!listSinger.isEmpty())
+						listSinger.clear();
+					listSinger.addAll(barSingers);
+					adapterSinger.notifyDataSetChanged();
+				}
+
+				// 促销图
+				List<PicModle> picModel = (List<PicModle>) baseModel.getListObject("barCxPhotoList", PicModle.class);
+				if (picModel != null && picModel.size() > 0 && picModel.get(0) != null) {
+					if (!listSales.isEmpty())
+						listSales.clear();
+					listSales.addAll(picModel);
+					if (listSales.size() <= 0) {
+						llPubSales.setVisibility(View.GONE);
+						salesAdapter = null;
+						listSales = null;
+					} else
+						salesAdapter.notifyDataSetChanged();
+				} else {
+					llPubSales.setVisibility(View.GONE);
+					salesAdapter = null;
+					listSales = null;
+				}
+
+				// 套餐选择
+				List<PubPackageModel> barPackage = ((List<PubPackageModel>) baseModel.getListObject("barCouponList", PubPackageModel.class));
+				if (barPackage == null || barPackage.size() <= 0 || barPackage.get(0) == null) {
+					llSelectPackage.setVisibility(View.GONE);
+					adapterPackage = null;
+					listPubPackage = null;
+				} else {
+					if (!listPubPackage.isEmpty())
+						listPubPackage.clear();
+					listPubPackage.addAll(barPackage);
+					adapterPackage.notifyDataSetChanged();
+				}
+
+			}
+
+			@Override
+			public void onStart() {
+			}
+
+			@Override
+			public void onFailure(Throwable error, String content) {
+			}
+
+			@Override
+			public void onFinish() {
+			}
+		});
+	}
+}

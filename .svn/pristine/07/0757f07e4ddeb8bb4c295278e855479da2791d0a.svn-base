@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 附近酒吧塞选窗口 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/container_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#50000000"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/container_01"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/date_item_content" >
+
+        <View
+            android:id="@+id/viewDivider"
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:layout_centerInParent="true" />
+
+        <CheckBox
+            android:id="@+id/ckbSingerGroup"
+            style="@style/SexBoyCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/viewDivider"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:text="@string/search_only_boy"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/size_13" />
+
+        <CheckBox
+            android:id="@+id/ckbSingerPersonal"
+            style="@style/SexBoyCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/viewDivider"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="20dp"
+            android:text="@string/search_only_girl"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/size_13" />
+
+        <CheckBox
+            android:id="@+id/ckbSingerPopularity"
+            style="@style/SexBoyCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/ckbSingerGroup"
+            android:layout_below="@id/viewDivider"
+            android:layout_marginTop="10dp"
+            android:text="@string/search_nearby"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/size_13" />
+
+        <CheckBox
+            android:id="@+id/ckbSingerAll"
+            style="@style/SexBoyCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/ckbSingerPersonal"
+            android:layout_below="@id/viewDivider"
+            android:layout_marginTop="10dp"
+            android:checked="true"
+            android:text="@string/date_expect_normal"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/size_13" />
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 蓝-深蓝.9图片，按钮选择器 -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@drawable/barfriend_boy_bg" android:state_enabled="false"/>
+    <item android:drawable="@drawable/barfriend_girl_bg"/>
+
+</selector>

@@ -1,0 +1,89 @@
+package com.fullteem.yueba.engine.pay;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.fullteem.yueba.model.CommonModel;
+import com.fullteem.yueba.model.OrderPayModel;
+import com.fullteem.yueba.net.Urls;
+import com.fullteem.yueba.net.http.AsyncHttpResponseHandler;
+import com.fullteem.yueba.net.http.HttpRequestFactory;
+import com.fullteem.yueba.util.LogUtil;
+
+import android.content.Context;
+
+public class PayManager {
+	public static void pay(Context context, OrderPayModel orderPayModel,
+			PayType payType) {
+		LogUtil.printPayLog("PayManager" + "start pay");
+		IOrder order = PayManager.getOrder(orderPayModel, payType);
+		if (order.checkOrder()) {
+			IPayment payment = PayManager.getPayment(context, payType);
+
+			PayStateMachine machine = PayStateMachine.getInstance();
+			machine.initPayment(order, payment);
+			machine.startPay();
+		}
+	}
+
+	private static IPayment getPayment(Context context, PayType type) {
+		if (type == PayType.PAYBYALIPAY) {
+			return new AliPayment(context);
+		} else if (type == PayType.PAYBYWECHAT) {
+			return new WeChatPayment(context);
+		} else {
+			throw new RuntimeException("does not support such pay type");
+		}
+	}
+
+	private static IOrder getOrder(OrderPayModel orderPayModel, PayType type) {
+		if (type == PayType.PAYBYALIPAY) {
+			return new AliOrder(orderPayModel);
+		} else if (type == PayType.PAYBYWECHAT) {
+			return new WeChatOrder(orderPayModel);
+		} else {
+			throw new RuntimeException("does not support such pay type");
+		}
+	}
+
+	public static void refund(String userId, String orderNo) {
+		LogUtil.printPayLog("PayManager" + "start refund");
+
+		JSONObject ob = new JSONObject();
+		ob.put("userId", userId);
+		ob.put("orderNo", orderNo);
+
+		HttpRequestFactory.getInstance().getRequest(Urls.ALI_PAY_REFUND, ob,
+				new AsyncHttpResponseHandler() {
+
+					@Override
+					public void onSuccess(String content) {
+						super.onSuccess(content);
+
+						LogUtil.printPayLog("refund request is handled");
+						LogUtil.printPayLog(content);
+
+						CommonModel rm = new CommonModel();
+						rm = JSON.parseObject(content, CommonModel.class);
+
+						if (rm != null && rm.getCode() != null
+								&& "200".equalsIgnoreCase(rm.getCode())) {
+							LogUtil.printPayLog("refund succeed");
+
+						} else {
+							LogUtil.printPayLog("refund code is not correct");
+						}
+					}
+
+					public void onFailure(Throwable error, String content) {
+						LogUtil.printPayLog("failed to refund");
+
+					};
+
+					public void onFinish() {
+						LogUtil.printPayLog("on refund finish");
+
+					};
+				});
+	}
+
+}

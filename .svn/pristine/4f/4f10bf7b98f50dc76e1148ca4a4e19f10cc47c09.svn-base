@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <com.fullteem.yueba.widget.CircleImageView
+        android:id="@+id/ImgViewHeader"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/img_icon" />
+
+    <!-- 姓名，性别，心情 -->
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="74dp"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@+id/ImgViewHeader" >
+
+        <RelativeLayout
+            android:id="@+id/firstLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="top" >
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:ellipsize="end"
+                android:ems="7"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:text="@string/name_normal"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_15" />
+
+            <Button
+                android:id="@+id/btnBarName"
+                style="@style/btn_bgBule2White_textWhite2Black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:focusable="false"
+                android:paddingBottom="5dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="5dp"
+                android:text="@string/singer_barName_normal"
+                android:textSize="@dimen/size_13"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentBottom="true"
+            android:gravity="center_vertical"
+            android:layout_below="@+id/firstLayout" >
+
+            <TextView
+                android:id="@+id/tvSingerValue"
+                style="@style/GrayWords"
+                android:text="@string/singer_value_normal" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/tvComments"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/singer_comment_icon"
+                    android:gravity="center_vertical"
+                    android:text="1234"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/size_8" />
+
+                <TextView
+                    android:id="@+id/tvPraise"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:drawableLeft="@drawable/singer_praise_icon"
+                    android:gravity="center_vertical"
+                    android:text="1234"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/size_8" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.8dp"
+                android:layout_below="@id/tvSingerValue"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/bg_nearby_date_line" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

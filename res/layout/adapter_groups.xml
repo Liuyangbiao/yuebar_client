@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <com.fullteem.yueba.widget.CircleImageView
+        android:id="@+id/ImgViewHeader"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/img_icon" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="74dp"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@+id/ImgViewHeader" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:gravity="top"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:ems="7"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:text="@string/name_normal"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_14" />
+
+            <TextView
+                android:id="@+id/tvSpace"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="2dp"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="@string/space_normal"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/size_10"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tvPeopleNums"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:text="@string/group_peoplenums"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/size_12" />
+
+        <com.fullteem.yueba.widget.AutoRollTextView
+            android:id="@+id/tvMood"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="3dp"
+            android:ellipsize="end"
+            android:paddingLeft="1dp"
+            android:paddingRight="5dp"
+            android:singleLine="true"
+            android:text="@string/mood_normal"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/size_12" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.9dp"
+            android:background="@drawable/bg_nearby_date_line" />
+    </RelativeLayout>
+
+</RelativeLayout>

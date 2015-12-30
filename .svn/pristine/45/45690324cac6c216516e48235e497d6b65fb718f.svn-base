@@ -1,0 +1,89 @@
+package com.fullteem.yueba.service;
+
+import com.alibaba.fastjson.JSON;
+import com.fullteem.yueba.net.Urls;
+import com.fullteem.yueba.net.http.AsyncHttpResponseHandler;
+import com.fullteem.yueba.net.http.HttpRequestFactory;
+import com.fullteem.yueba.util.LogUtil;
+
+public class ServerHostManager {
+	enum HOST_FETCH_STATE {
+		INITED, FETCHING, SUCCEED, FAILED
+	};
+
+	public static ServerHostManager instance;
+
+	private static HOST_FETCH_STATE state;
+
+	private ServerHostManager() {
+		state = HOST_FETCH_STATE.INITED;
+	}
+
+	public interface IHostFetchListener {
+		void onHostFetched(boolean result);
+	}
+
+	public static ServerHostManager getInstance() {
+		LogUtil.printUserEntryLog("ServerHostManager getInstance");
+		if (instance == null) {
+			instance = new ServerHostManager();
+		}
+
+		return instance;
+	}
+
+	/*
+	 * When first time to call server api, need to make sure the host is ready.
+	 */
+	public boolean isHostReady() {
+		LogUtil.printUserEntryLog("enter ServerHostManager isHostReady");
+		return (state == HOST_FETCH_STATE.SUCCEED || state == HOST_FETCH_STATE.FAILED);
+	}
+
+	public void sendServerHostRequest(final IHostFetchListener listener) {
+		LogUtil.printUserEntryLog("ServerHostManager sendServerHostRequest");
+		state = HOST_FETCH_STATE.FETCHING;
+
+		// JSONObject ob = new JSONObject();
+
+		HttpRequestFactory.getInstance().getRequest(Urls.GET_SERVER_HOST, null,
+				new AsyncHttpResponseHandler() {
+					@Override
+					public void onSuccess(String content) {
+						super.onSuccess(content);
+
+						LogUtil.printUserEntryLog("sendServerHostRequest content:"
+								+ content);
+
+						ServerHostModel rm = new ServerHostModel();
+						rm = JSON.parseObject(content, ServerHostModel.class);
+
+						if (rm != null) {
+
+							String serverHost = rm.getResult().getHost();
+							LogUtil.printUserEntryLog("sendServerHostRequest succeed, server url is:"
+									+ serverHost);
+							Urls.setBaseServerUrl(serverHost);
+							state = HOST_FETCH_STATE.SUCCEED;
+						}
+					}
+
+					@Override
+					public void onFailure(Throwable error, String content) {
+						LogUtil.printUserEntryLog("sendServerHostRequest failed:"
+								+ content + " " + error.toString());
+					};
+
+					@Override
+					public void onFinish() {
+						LogUtil.printUserEntryLog("sendServerHostRequest finished");
+						if (state != HOST_FETCH_STATE.SUCCEED) {
+							state = HOST_FETCH_STATE.FAILED;
+							Urls.setDefaultServerUrl();
+						}
+
+						listener.onHostFetched(state == HOST_FETCH_STATE.SUCCEED);
+					};
+				});
+	}
+}

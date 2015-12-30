@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <com.fullteem.yueba.widget.CircleImageView
+        android:id="@+id/iv_groupHeader"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/img_loading_default" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@+id/iv_groupHeader" >
+
+        <TextView
+            android:id="@+id/tv_groupName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:ems="7"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:text="@string/nearby_group_name"
+            android:textColor="@color/girl_red"
+            android:textSize="@dimen/size_14" />
+
+        <TextView
+            android:id="@+id/tv_distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="2dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="@string/nearby_group_distatce"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/size_10" />
+
+        <LinearLayout
+            android:id="@+id/ll_peopleNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal" >
+
+            <TextView style="@style/GrayWords" />
+
+            <TextView
+                android:id="@+id/tv_peopleNum"
+                style="@style/GrayWords" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_below="@id/ll_peopleNum"
+            android:id="@+id/tv_mood"
+            style="@style/GrayWords"
+            android:text="@string/mood_normal" />
+        <View 
+            android:layout_width="match_parent"
+            android:layout_marginTop="2dp"
+            android:layout_below="@id/tv_mood"
+            android:layout_height="1dp"
+            android:background="@drawable/bg_nearby_date_line"/>
+    </RelativeLayout>
+
+</RelativeLayout>

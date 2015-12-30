@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_main"
+    android:orientation="vertical" >
+
+    <com.fullteem.yueba.widget.TopTitleView
+        android:id="@+id/top_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.fullteem.yueba.widget.OverScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp" >
+
+                <Button
+                    android:id="@+id/btn_datePublished"
+                    style="@style/btn_option_item"
+                    android:drawableRight="@null"
+                    android:text="@string/date_published" />
+
+                <ImageView
+                    android:id="@+id/ivDatePublished"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/down_arrow_icon" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/llDatePublished"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/content_bottom_bg"
+                android:orientation="vertical"
+                android:visibility="gone" >
+
+                <include
+                    android:id="@+id/lvLoadingPublished"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    layout="@layout/base_load_empty_layout" />
+
+                <com.fullteem.yueba.widget.ExpandListView
+                    android:id="@+id/lv_datePublished"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:cacheColorHint="@color/transparent"
+                    android:divider="#00000000"
+                    android:dividerHeight="0.0dp"
+                    android:listSelector="@color/transparent"
+                    android:padding="0dp"
+                    android:visibility="gone" />
+
+                <LinearLayout
+                    android:id="@+id/ll_loadMoreDatePublished"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone" >
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:background="@drawable/bg_nearbydate_details_dividerline" />
+
+                    <Button
+                        android:id="@+id/btn_loadMoreDatePublished"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/content_bottom_bg"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="5dp"
+                        android:text="@string/date_loadmore"
+                        android:textColor="@color/girl_red" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp" >
+
+                <Button
+                    android:id="@+id/btn_dateEnrolled"
+                    style="@style/btn_option_item"
+                    android:drawableRight="@null"
+                    android:text="@string/date_enrolled" />
+
+                <ImageView
+                    android:id="@+id/ivDateEnrolled"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/down_arrow_icon" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/llDateEnrolled"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/content_bottom_bg"
+                android:orientation="vertical"
+                android:visibility="gone" >
+
+                <include
+                    android:id="@+id/lvLoadingEnrolled"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    layout="@layout/base_load_empty_layout" />
+
+                <com.fullteem.yueba.widget.ExpandListView
+                    android:id="@+id/lv_dateEnrolled"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:cacheColorHint="@color/transparent"
+                    android:divider="#eeeeee"
+                    android:dividerHeight="3dp"
+                    android:listSelector="@color/transparent"
+                    android:padding="0dp"
+                    android:visibility="gone" />
+
+                <LinearLayout
+                    android:id="@+id/ll_loadMoreDateEnrolled"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:visibility="gone" >
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:background="@drawable/bg_nearbydate_details_dividerline" />
+
+                    <Button
+                        android:id="@+id/btn_loadMoreDateEnrolled"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/content_bottom_bg"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="5dp"
+                        android:text="@string/date_loadmore"
+                        android:textColor="@color/girl_red" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--
+                 <Button
+                android:id="@+id/btn_dateEnrolled"
+                style="@style/btn_option_item"
+                android:layout_marginTop="6dp"
+                android:drawableRight="@drawable/down_arrow_icon"
+                android:text="@string/date_enrolled" />            -->
+
+            <Button
+                android:id="@+id/btn_datePublish"
+                style="@style/btn_option_item"
+                android:layout_marginTop="6dp"
+                android:text="@string/date_publish" />
+        </LinearLayout>
+    </com.fullteem.yueba.widget.OverScrollView>
+
+</LinearLayout>

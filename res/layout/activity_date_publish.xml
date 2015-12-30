@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_main"
+    android:orientation="vertical" >
+
+    <com.fullteem.yueba.widget.TopTitleView
+        android:id="@+id/top_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btn_surePublish"
+        android:layout_below="@id/top_title"
+        android:layout_margin="6dp"
+        android:background="@drawable/date_item_content"
+        android:padding="0dp"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="0dp" >
+
+            <!-- 主题 -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="9dp" >
+
+                <TextView
+                    style="@style/tv_blacktitle_style"
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="@string/date_subject" />
+
+                <EditText
+                    android:id="@+id/et_dateSubject"
+                    style="@style/tv_blacktitle_style"
+                    android:background="@color/transparent"
+                    android:maxEms="30"
+                    android:singleLine="true" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.8dp"
+                android:background="@drawable/bg_nearby_date_dividerline" />
+            <!-- 时间 -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="9dp" >
+
+                <TextView
+                    style="@style/tv_blacktitle_style"
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="@string/date_time" />
+
+                <TextView
+                    android:id="@+id/tv_dateTime"
+                    style="@style/tv_blacktitle_style"
+                    android:background="@color/transparent"
+                    android:maxEms="30"
+                    android:singleLine="true" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.8dp"
+                android:background="@drawable/bg_nearby_date_dividerline" />
+            <!-- 费用 -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="9dp" >
+
+                <TextView
+                    style="@style/tv_blacktitle_style"
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="@string/date_fees" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="6dp"
+                    android:gravity="center_vertical"
+                    android:padding="0dp"
+                    android:weightSum="3" >
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="left"
+                        android:padding="0dp" >
+
+                        <CheckBox
+                            android:id="@+id/ckb_payByYou"
+                            style="@style/SexGirlCheckBox"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="20dp"
+                            android:paddingRight="0dp"
+                            android:text="@string/date_payByYou"
+                            android:textColor="@color/gray"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="left"
+                        android:padding="0dp" >
+
+                        <CheckBox
+                            android:id="@+id/ckb_payByMe"
+                            style="@style/SexGirlCheckBox"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:paddingLeft="20dp"
+                            android:paddingRight="0dp"
+                            android:text="@string/date_payByMe"
+                            android:textColor="@color/gray"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="left"
+                        android:padding="0dp" >
+
+                        <CheckBox
+                            android:id="@+id/ckb_payByAA"
+                            style="@style/SexGirlCheckBox"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="20dp"
+                            android:paddingRight="0dp"
+                            android:text="@string/date_payByAA"
+                            android:textColor="@color/gray"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.8dp"
+                android:background="@drawable/bg_nearby_date_dividerline" />
+
+            <LinearLayout
+                android:id="@+id/llFavorite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="9dp"
+                android:visibility="gone" >
+
+                <TextView
+                    style="@style/tv_blacktitle_style"
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="@string/date_favorite" />
+
+                <TextView
+                    android:id="@+id/tv_dateFavorite"
+                    style="@style/tv_blacktitle_style"
+                    android:background="@color/transparent"
+                    android:maxEms="30"
+                    android:singleLine="true" />
+            </LinearLayout>
+            <!-- 期望 -->
+
+            <LinearLayout
+                android:id="@+id/llGender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="9dp" >
+
+                <TextView
+                    style="@style/tv_blacktitle_style"
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="@string/date_expect" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="6dp"
+                    android:gravity="center_vertical"
+                    android:padding="0dp"
+                    android:weightSum="3" >
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="left"
+                        android:padding="0dp" >
+
+                        <CheckBox
+                            android:id="@+id/ckb_genderBoy"
+                            style="@style/SexGirlCheckBox"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="20dp"
+                            android:paddingRight="0dp"
+                            android:text="@string/checkbox_sex_boy"
+                            android:textColor="@color/gray"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="left"
+                        android:padding="0dp" >
+
+                        <CheckBox
+                            android:id="@+id/ckb_genderGirl"
+                            style="@style/SexGirlCheckBox"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:paddingLeft="20dp"
+                            android:paddingRight="0dp"
+                            android:text="@string/checkbox_sex_girl"
+                            android:textColor="@color/gray"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="left"
+                        android:padding="0dp" >
+
+                        <CheckBox
+                            android:id="@+id/ckb_genderOther"
+                            style="@style/SexGirlCheckBox"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="20dp"
+                            android:paddingRight="0dp"
+                            android:text="@string/date_expect_normal"
+                            android:textColor="@color/gray"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.8dp"
+                android:background="@drawable/bg_nearby_date_dividerline" />
+
+            <!-- 活动描述 -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="9dp" >
+
+                <TextView
+                    style="@style/tv_blacktitle_style"
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="@string/date_describe" />
+
+                <EditText
+                    android:id="@+id/et_dateContent"
+                    style="@style/tv_blacktitle_style"
+                    android:background="@drawable/bg_nearby_datecontent"
+                    android:gravity="left"
+                    android:hint="@string/date_content_hint"
+                    android:lines="5"
+                    android:maxEms="140"
+                    android:maxLines="7"
+                    android:padding="9dp"
+                    android:singleLine="false" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.8dp"
+                android:background="@drawable/bg_nearby_date_dividerline" />
+            <!-- 活动地点 -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="9dp" >
+
+                <TextView
+                    style="@style/tv_blacktitle_style"
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="@string/date_address" />
+
+                <TextView
+                    android:id="@+id/tv_dateAddress"
+                    style="@style/GrayWords"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/date_payByYou"
+                    android:textSize="12sp"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/btn_dateAddress"
+                    style="@style/btn_bgBule2White_textWhite2Black"
+                    android:layout_marginLeft="12dp"
+                    android:text="@string/hint_pleaceSelect" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.8dp"
+                android:background="@drawable/bg_nearby_date_dividerline" />
+            <!-- 酒水详单 -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="9dp" >
+
+                <TextView
+                    style="@style/tv_blacktitle_style"
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="@string/date_wine" />
+
+                <TextView
+                    android:id="@+id/tv_dateWine"
+                    style="@style/GrayWords"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/date_payByYou"
+                    android:textSize="12sp"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/btn_dateWine"
+                    style="@style/btn_bgBule2White_textWhite2Black"
+                    android:layout_marginLeft="12dp"
+                    android:text="@string/hint_pleaceSelect" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btn_surePublish"
+        style="@style/btn_bgBule2White_textWhite2Black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="12dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:text="@string/publish"
+        android:textSize="@dimen/size_15"
+        android:textStyle="bold" />
+
+</RelativeLayout>

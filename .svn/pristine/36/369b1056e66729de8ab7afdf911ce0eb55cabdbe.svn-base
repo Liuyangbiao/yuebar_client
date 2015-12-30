@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="white">#FFFFFF</color>
+    <color name="halfwhite">#7FFFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="gray">#808080</color>
+    <color name="red">#FF0000</color>
+    <color name="gold">#FFD700</color>
+    <color name="yellow">#FFFF00</color>
+    <color name="green">#008000</color>
+    <color name="blue">#0000FF</color>
+    <color name="purple">#800080</color>
+    <color name="pink">#FFC0CB</color>
+    <color name="orange">#FFA500</color>
+    <color name="lemonyellow">#FFFACD</color>
+    <color name="graywhite">#F5F5F5</color>
+    <color name="grayslate">#708090</color>
+    <color name="lightblue">#0083FF</color>
+    <color name="transparent">#00000000</color>
+    <color name="transparent_background">#50000000</color>
+
+    <!-- 主标题栏颜色 -->
+    <color name="main_bg">#eff0f0</color>
+    <color name="main_bar">#f3f3f3</color>
+    <color name="head_text">#edaa7f</color>
+    <color name="main_text">#AEA497</color>
+    <color name="main_block"> #C4B7A6</color>
+    <color name="main_block_text">#AD0040</color>
+    <color name="main_black">#F0F0F0</color>
+    <color name="main_title">#3A7EE4</color>
+    <color name="main_color_gold">#CC9933</color>
+    <color name="main_color_gold2">#CC2266</color>
+    <color name="main_color_deepgold">#806239</color>
+    <color name="main_color_blue">#3b598f</color>
+    <color name="main_color_black">#333333</color>
+    <color name="main_color_grayblack">#666</color>
+    <color name="main_color_lightblack">#999</color>
+    <color name="main_color_grayblue">#002266</color>
+    <color name="main_color_red">#f7291b</color>
+    <color name="main_color_danblak">#ccc</color>
+    <color name="main_color_deepgray">#e2e2e2</color>
+    <color name="main_color_rankgold">#8c6239</color>
+
+    <!-- 环信颜色 -->
+    <color name="common_top_bar_blue">#4ebcd3</color>
+    <color name="btn_login_normal">#007086</color>
+    <color name="btn_login_pressed">#303744</color>
+    <color name="btn_logout_normal">#d33f3f</color>
+    <color name="btn_logout_pressed">#DA5A4D</color>
+    <color name="btn_register_normal">#2dafa3</color>
+    <color name="btn_register_pressed">#4ebcd3</color>
+    <color name="common_bottom_bar_normal_bg">#2d2f31</color>
+    <color name="common_bottom_bar_selected_bg">#161718</color>
+    <color name="common_botton_bar_blue">#2ea7e0</color>
+    <color name="common_bg">#fcfcfc</color>
+    <color name="btn_pressed_green_solid">#B6DA53</color>
+    <color name="divider_list">#cccccc</color>
+    <color name="top_bar_normal_bg">#4ebcd3</color>
+    <color name="error_item_color">#F6EBE6</color>
+    <color name="bottom_bar_normal_bg">#2D2F31</color>
+    <color name="bottom_text_color_normal">#ffffff</color>
+    <color name="btn_white_normal">#f7f8f8</color>
+    <color name="btn_white_pressed">#b5b5b6</color>
+    <color name="btn_green_noraml">#68C270</color>
+    <color name="btn_green_pressed">#6FCD78</color>
+    <color name="btn_gray_normal">#c0c0c0</color>
+    <color name="btn_gray_pressed_status">#b5b5b6</color>
+    <color name="btn_gray_pressed">#666667</color>
+    <color name="btn_blue_normal">#1e90ff</color>
+    <color name="btn_blue_pressed">#0066FF</color>
+    <color name="gray_pressed">#b5b5b6</color>
+    <color name="gray_normal">#666667</color>
+    <color name="grid_state_pressed">#1Affffff</color>
+    <color name="grid_state_focused">#80000000</color>
+    <color name="voip_interface_text_color">#bababa</color>
+    <color name="black_deep">#FF000000</color>
+
+    <!-- for四大模块底部显示颜色 -->
+    <color name="tv_bottom_unselected">#ff868686</color>
+    <color name="tv_bottom_selected">#ff3a74</color>
+
+    <!-- for附近模块颜色 -->
+    <color name="btn_nearby_unselected">#999999</color>
+    <color name="btn_nearby_selected">#ff3973</color>
+    
+    <!-- for nearby main:top center  -->
+    <color name="nearby_top_center_unselected">#000000</color>
+    <color name="nearby_top_center_selected">#FFFFFF</color>
+
+    <!-- 性别颜色 -->
+    <color name="girl_red">#EF4584</color>
+    <color name="boy_blue">#0090FF</color>
+
+    <!-- 消息弹出窗口颜色 -->
+    <color name="msg_menu_bg">#F0EDEC</color>
+    
+    <!-- 酒吧在线颜色 -->
+    <color name="pub_online_normal">#cccccc</color>
+    <color name="pub_online_selected">#f0206d</color>
+
+</resources>

@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_main"
+    android:orientation="vertical" >
+
+    <com.fullteem.yueba.widget.TopTitleView
+        android:id="@+id/top_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/reason"
+        style="@style/tv_graytitle_style"
+        android:layout_width="wrap_content"
+        android:layout_below="@+id/top_title"
+        android:layout_marginLeft="10dp"
+        android:text="@string/whistle_blow_reason" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btn_submit"
+        android:layout_below="@id/reason"
+        android:layout_margin="5dp"
+        android:background="@drawable/date_item_content"
+        android:padding="0dp"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="0dp" >
+
+            <!-- list -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="0dp" >
+
+                <!-- first item -->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="3dp" >
+
+                    <TextView
+                        style="@style/WhistleBlowText"
+                        android:text="@string/whistle_blow_porn" />
+
+                    <CheckBox
+                        android:id="@+id/ckb_blow_porn"
+                        style="@style/WhistleBlowCheckBox"
+                        android:layout_gravity="right" />
+                </LinearLayout>
+
+                <!-- divider -->
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.8dp"
+                    android:background="@drawable/bg_nearby_date_dividerline" />
+
+                <!-- second item -->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="3dp" >
+
+                    <TextView
+                        style="@style/WhistleBlowText"
+                        android:text="@string/whistle_blow_politics" />
+
+                    <CheckBox
+                        android:id="@+id/ckb_blow_politics"
+                        style="@style/WhistleBlowCheckBox" />
+                </LinearLayout>
+
+                <!-- divider -->
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.8dp"
+                    android:background="@drawable/bg_nearby_date_dividerline" />
+
+                <!-- 3 item -->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="3dp" >
+
+                    <TextView
+                        style="@style/WhistleBlowText"
+                        android:text="@string/whistle_blow_violence" />
+
+                    <CheckBox
+                        android:id="@+id/ckb_blow_violence"
+                        style="@style/WhistleBlowCheckBox" />
+                </LinearLayout>
+
+                <!-- divider -->
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.8dp"
+                    android:background="@drawable/bg_nearby_date_dividerline" />
+
+                <!-- 4 item -->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="3dp" >
+
+                    <TextView
+                        style="@style/WhistleBlowText"
+                        android:text="@string/whistle_blow_cheat" />
+
+                    <CheckBox
+                        android:id="@+id/ckb_blow_cheat"
+                        style="@style/WhistleBlowCheckBox" />
+                </LinearLayout>
+
+                <!-- divider -->
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.8dp"
+                    android:background="@drawable/bg_nearby_date_dividerline" />
+
+                <!-- 5 item -->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="3dp" >
+
+                    <TextView
+                        style="@style/WhistleBlowText"
+                        android:text="@string/whistle_blow_abuse" />
+
+                    <CheckBox
+                        android:id="@+id/ckb_blow_abuse"
+                        style="@style/WhistleBlowCheckBox" />
+                </LinearLayout>
+
+                <!-- divider -->
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.8dp"
+                    android:background="@drawable/bg_nearby_date_dividerline" />
+
+                <!-- 6 item -->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="3dp" >
+
+                    <TextView
+                        style="@style/WhistleBlowText"
+                        android:text="@string/whistle_blow_harassment" />
+
+                    <CheckBox
+                        android:id="@+id/ckb_blow_harassment"
+                        style="@style/WhistleBlowCheckBox" />
+                </LinearLayout>
+
+                <!-- divider -->
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.8dp"
+                    android:background="@drawable/bg_nearby_date_dividerline" />
+
+                <!-- 活动描述 -->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="3dp" >
+
+                    <EditText
+                        android:id="@+id/et_blow_detail"
+                        style="@style/WhistleBlowText"
+                        android:background="@drawable/bg_nearby_datecontent"
+                        android:gravity="left"
+                        android:hint="@string/whistle_blow_hint"
+                        android:lines="5"
+                        android:maxEms="140"
+                        android:maxLines="7"
+                        android:padding="2dp"
+                        android:singleLine="false"
+                        android:textColorHint="@color/btn_gray_normal" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btn_submit"
+        style="@style/btn_bgBule2White_textWhite2Black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="12dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:text="@string/submit"
+        android:textSize="@dimen/size_15"
+        android:textStyle="bold" />
+
+</RelativeLayout>

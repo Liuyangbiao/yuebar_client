@@ -1,0 +1,430 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:bind="http://robobinding.org/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center" >
+
+    <com.fullteem.yueba.widget.TopTitleView
+        android:id="@+id/top_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:id="@+id/ll_temp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/top_title"
+        android:background="@drawable/register_top_bg"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:id="@+id/rl_usrHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp" >
+
+            <com.fullteem.yueba.widget.CircleImageView
+                android:id="@+id/iv_usrHeader"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:background="@drawable/img_icon" >
+            </com.fullteem.yueba.widget.CircleImageView>
+
+            <com.fullteem.yueba.widget.CircleImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_alignRight="@id/iv_usrHeader"
+                android:background="@drawable/add_personal_pic" >
+            </com.fullteem.yueba.widget.CircleImageView>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_usrHeader"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:maxEms="20"
+                android:singleLine="true"
+                android:text="@string/usrname_normal"
+                android:textColor="@color/white"
+                android:textSize="@dimen/size_15"
+                bind:text="{usrNickname}" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="20dp"
+                android:drawableLeft="@drawable/img_charm"
+                android:drawablePadding="12dp"
+                android:maxEms="20"
+                android:singleLine="true"
+                android:textColor="@color/white"
+                android:textSize="@dimen/size_13"
+                bind:text="{charm}" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:paddingBottom="5dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp" >
+
+        <Button
+            android:id="@+id/btn_logout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/login_btn_selector"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:text="@string/perssonal_logout"
+            android:textColor="@color/white"
+            android:textSize="@dimen/size_15"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <com.fullteem.yueba.widget.OverScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/ll_btn"
+        android:layout_below="@id/ll_temp"
+        android:layout_marginBottom="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/date_item_content"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp" >
+
+            <LinearLayout
+                android:id="@+id/ll_perssonalInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingLeft="18dp"
+                android:paddingRight="12dp"
+                android:paddingTop="10dp" >
+
+                <TextView
+                    style="@style/tv_blacktitle_style"
+                    android:layout_width="wrap_content"
+                    android:drawableLeft="@drawable/img_personal_information"
+                    android:drawablePadding="18dp"
+                    android:gravity="center"
+                    android:text="@string/perssonal_info" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="fitEnd"
+                    android:src="@drawable/img_arrow_right" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/bg_nearby_date_dividerline"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:id="@+id/ll_orderManage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingLeft="18dp"
+                android:paddingRight="12dp"
+                android:paddingTop="10dp"
+                android:visibility="gone" >
+
+                <TextView
+                    style="@style/tv_blacktitle_style"
+                    android:layout_width="wrap_content"
+                    android:drawableLeft="@drawable/img_order"
+                    android:drawablePadding="18dp"
+                    android:gravity="center"
+                    android:text="@string/perssonal_order_manage" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="fitEnd"
+                    android:src="@drawable/img_arrow_right" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_gift"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingLeft="18dp"
+                android:paddingRight="12dp"
+                android:paddingTop="10dp"
+                android:visibility="gone" >
+
+                <TextView
+                    style="@style/tv_blacktitle_style"
+                    android:layout_width="wrap_content"
+                    android:drawableLeft="@drawable/img_gift"
+                    android:drawablePadding="18dp"
+                    android:gravity="center"
+                    android:text="@string/perssonal_gift" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="fitEnd"
+                    android:src="@drawable/img_arrow_right" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_rechargRecords"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingLeft="18dp"
+                android:paddingRight="12dp"
+                android:paddingTop="10dp"
+                android:visibility="gone" >
+
+                <TextView
+                    style="@style/tv_blacktitle_style"
+                    android:layout_width="wrap_content"
+                    android:drawableLeft="@drawable/img_records"
+                    android:drawablePadding="18dp"
+                    android:gravity="center"
+                    android:text="@string/recharg_records" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="fitEnd"
+                    android:src="@drawable/img_arrow_right" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_scoreQuery"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingLeft="18dp"
+                android:paddingRight="12dp"
+                android:paddingTop="10dp"
+                android:visibility="gone" >
+
+                <TextView
+                    style="@style/tv_blacktitle_style"
+                    android:layout_width="wrap_content"
+                    android:drawableLeft="@drawable/img_score"
+                    android:drawablePadding="18dp"
+                    android:gravity="center"
+                    android:text="@string/perssonal_score_query" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="fitEnd"
+                    android:src="@drawable/img_arrow_right" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_consumptionRecords"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingLeft="18dp"
+                android:paddingRight="12dp"
+                android:paddingTop="10dp"
+                android:visibility="gone" >
+
+                <TextView
+                    style="@style/tv_blacktitle_style"
+                    android:layout_width="wrap_content"
+                    android:drawableLeft="@drawable/img_records_consumption"
+                    android:drawablePadding="18dp"
+                    android:gravity="center"
+                    android:text="@string/consumption_records" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="fitEnd"
+                    android:src="@drawable/img_arrow_right" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_deleteChat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingLeft="18dp"
+                android:paddingRight="12dp"
+                android:paddingTop="10dp"
+                android:visibility="gone" >
+
+                <TextView
+                    style="@style/tv_blacktitle_style"
+                    android:layout_width="wrap_content"
+                    android:drawableLeft="@drawable/img_delete"
+                    android:drawablePadding="18dp"
+                    android:gravity="center"
+                    android:text="@string/perssonal_deletechat" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="fitEnd"
+                    android:src="@drawable/img_arrow_right" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/bg_nearby_date_dividerline" />
+
+            <LinearLayout
+                android:id="@+id/ll_changePwd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingLeft="18dp"
+                android:paddingRight="12dp"
+                android:paddingTop="10dp" >
+
+                <TextView
+                    style="@style/tv_blacktitle_style"
+                    android:layout_width="wrap_content"
+                    android:drawableLeft="@drawable/img_change_password"
+                    android:drawablePadding="18dp"
+                    android:gravity="center"
+                    android:text="@string/perssonal_changepwd" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="fitEnd"
+                    android:src="@drawable/img_arrow_right" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/bg_nearby_date_dividerline" />
+
+            <LinearLayout
+                android:id="@+id/ll_setSys"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingLeft="18dp"
+                android:paddingRight="12dp"
+                android:paddingTop="10dp" >
+
+                <TextView
+                    style="@style/tv_blacktitle_style"
+                    android:layout_width="wrap_content"
+                    android:drawableLeft="@drawable/img_set"
+                    android:drawablePadding="18dp"
+                    android:gravity="center"
+                    android:text="@string/perssonal_set" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="fitEnd"
+                    android:src="@drawable/img_arrow_right" />
+            </LinearLayout>
+
+            <!-- 系统消息 -->
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/bg_nearby_date_dividerline" />
+
+            <LinearLayout
+                android:id="@+id/ll_system_msg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingLeft="18dp"
+                android:paddingRight="12dp"
+                android:paddingTop="10dp" >
+
+                <TextView
+                    style="@style/tv_blacktitle_style"
+                    android:layout_width="wrap_content"
+                    android:drawableLeft="@drawable/img_set_voice"
+                    android:drawablePadding="18dp"
+                    android:gravity="center"
+                    android:text="@string/perssonal_msg" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="fitEnd"
+                    android:src="@drawable/img_arrow_right" />
+            </LinearLayout>
+        </LinearLayout>
+    </com.fullteem.yueba.widget.OverScrollView>
+
+</RelativeLayout>

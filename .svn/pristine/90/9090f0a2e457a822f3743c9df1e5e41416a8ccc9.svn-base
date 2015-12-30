@@ -1,0 +1,208 @@
+package com.fullteem.yueba.app.ui.fragment;
+
+import org.robobinding.ViewBinder;
+import org.robobinding.binder.BinderFactory;
+import org.robobinding.binder.BinderFactoryBuilder;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+
+import com.fullteem.yueba.R;
+import com.fullteem.yueba.app.AppContext;
+import com.fullteem.yueba.app.ui.ChangePasswdActivity;
+import com.fullteem.yueba.app.ui.ConsumeRecordsActivity;
+import com.fullteem.yueba.app.ui.GiftActivity;
+import com.fullteem.yueba.app.ui.LoginActivity;
+import com.fullteem.yueba.app.ui.NewFriendsMsgActivity;
+import com.fullteem.yueba.app.ui.OrderManageActivity;
+import com.fullteem.yueba.app.ui.PerssonalInfoAcitivity;
+import com.fullteem.yueba.app.ui.RechargRecordsActivity;
+import com.fullteem.yueba.app.ui.ScoreQueryActivity;
+import com.fullteem.yueba.app.ui.SetActivity;
+import com.fullteem.yueba.model.presentmodel.PersonalMainPresentModel;
+import com.fullteem.yueba.util.DisplayUtils;
+import com.fullteem.yueba.util.ImageLoaderUtil;
+import com.fullteem.yueba.widget.TopTitleView;
+
+/**
+ * @author jun
+ * @version 1.0.0
+ * @created 2014年11月26日&emsp;下午3:21:25
+ * @use 主界面->我
+ */
+public class PersonalMainFragment extends Fragment {
+	private PersonalMainPresentModel presentMode;
+
+	private PersonalMainFragment() {
+	}
+
+	private static PersonalMainFragment instance;
+
+	public static PersonalMainFragment getInstance() {
+		if (instance == null) {
+			instance = new PersonalMainFragment();
+		}
+		return instance;
+	}
+
+	private TopTitleView topTitle;
+	private ImageView usrHeader;
+	private LinearLayout llPerssonalInfo, llOrderManage, llGift,
+			llRechargRecords, llScoreQuery, llConsumptionRecords, llDeleteChat,
+			llChangePwd, llSetSys, ll_system_msg;
+	private Button btnLogout;
+	private EventListener mListener;
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		BinderFactory binderFactory = new BinderFactoryBuilder().build();
+		ViewBinder vb = binderFactory.createViewBinder(getActivity(), true);
+		presentMode = new PersonalMainPresentModel();
+		View rootView = vb.inflateAndBind(R.layout.fragment_perssonal_main,
+				presentMode);
+		initViews(rootView);
+		initDatq();
+		bindViews();
+		return rootView;
+	}
+
+	private void initViews(View rootView) {
+		topTitle = (TopTitleView) rootView.findViewById(R.id.top_title);
+		usrHeader = (ImageView) rootView.findViewById(R.id.iv_usrHeader);
+		btnLogout = (Button) rootView.findViewById(R.id.btn_logout);
+		llPerssonalInfo = (LinearLayout) rootView
+				.findViewById(R.id.ll_perssonalInfo);
+		llOrderManage = (LinearLayout) rootView
+				.findViewById(R.id.ll_orderManage);
+		llGift = (LinearLayout) rootView.findViewById(R.id.ll_gift);
+		llRechargRecords = (LinearLayout) rootView
+				.findViewById(R.id.ll_rechargRecords);
+		llScoreQuery = (LinearLayout) rootView.findViewById(R.id.ll_scoreQuery);
+		llConsumptionRecords = (LinearLayout) rootView
+				.findViewById(R.id.ll_consumptionRecords);
+		llDeleteChat = (LinearLayout) rootView.findViewById(R.id.ll_deleteChat);
+		llChangePwd = (LinearLayout) rootView.findViewById(R.id.ll_changePwd);
+		llSetSys = (LinearLayout) rootView.findViewById(R.id.ll_setSys);
+
+		// 系统消息
+		ll_system_msg = (LinearLayout) rootView
+				.findViewById(R.id.ll_system_msg);
+	}
+
+	private void initDatq() {
+		mListener = new EventListener();
+		topTitle.showCenterText(
+				getActivity().getString(R.string.personal_main), null);
+
+		// --------------------------examples data--------------------------
+
+		presentMode.setCharm(getString(R.string.gold_remnants_normal));
+		presentMode.setUsrNickname(getString(R.string.singer_name_normal));
+
+		// --------------------------examples data--------------------------
+	}
+
+	private void bindViews() {
+		btnLogout.setOnClickListener(mListener);
+		llChangePwd.setOnClickListener(mListener);
+		llOrderManage.setOnClickListener(mListener);
+		llGift.setOnClickListener(mListener);
+		llRechargRecords.setOnClickListener(mListener);
+		llScoreQuery.setOnClickListener(mListener);
+		llConsumptionRecords.setOnClickListener(mListener);
+		llSetSys.setOnClickListener(mListener);
+		llPerssonalInfo.setOnClickListener(mListener);
+
+		ll_system_msg.setOnClickListener(mListener);
+	}
+
+	private class EventListener implements OnClickListener {
+
+		@Override
+		public void onClick(View v) {
+			switch (v.getId()) {
+			case R.id.ll_changePwd:
+				startActivity(new Intent(getActivity(),
+						ChangePasswdActivity.class));
+				break;
+
+			case R.id.ll_orderManage:
+				startActivity(new Intent(getActivity(),
+						OrderManageActivity.class));
+				break;
+
+			case R.id.ll_gift:
+				startActivity(new Intent(getActivity(), GiftActivity.class));
+				break;
+
+			case R.id.ll_rechargRecords:
+				startActivity(new Intent(getActivity(),
+						RechargRecordsActivity.class));
+				break;
+
+			case R.id.ll_scoreQuery:
+				startActivity(new Intent(getActivity(),
+						ScoreQueryActivity.class));
+				break;
+
+			case R.id.ll_consumptionRecords:
+				startActivity(new Intent(getActivity(),
+						ConsumeRecordsActivity.class));
+				break;
+
+			case R.id.ll_setSys:
+				startActivity(new Intent(getActivity(), SetActivity.class));
+				break;
+
+			case R.id.ll_perssonalInfo:
+				Intent intentPerssonalInfo = new Intent(getActivity(),
+						PerssonalInfoAcitivity.class);
+				intentPerssonalInfo.putExtra("SHOW_BOTTOM_BAR", true);
+				startActivity(intentPerssonalInfo);
+				break;
+
+			// 系统消息
+			case R.id.ll_system_msg:
+				startActivity(new Intent(getActivity(),
+						NewFriendsMsgActivity.class));
+				break;
+
+			// 退出客户端
+			case R.id.btn_logout:
+				Intent intent = new Intent(getActivity(), LoginActivity.class);
+				AppContext.getApplication().logout();
+				//清除LoginActivity
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(intent);
+				getActivity().finish();
+				break;
+			}
+		}
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		if (AppContext.getApplication().getUserInfo() == null)
+			return;
+		if (!TextUtils.isEmpty(AppContext.getApplication().getUserInfo()
+				.getUserLogoUrl()))
+			ImageLoaderUtil.getImageLoader().displayImage(
+					DisplayUtils.getAbsolutelyUrl(AppContext.getApplication()
+							.getUserInfo().getUserLogoUrl()), usrHeader,
+					ImageLoaderUtil.getOptions());
+		presentMode.setUsrNickname(AppContext.getApplication().getUserInfo()
+				.getUserName());
+
+	}
+}

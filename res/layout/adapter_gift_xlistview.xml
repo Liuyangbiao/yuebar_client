@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_nearby_data_state" >
+
+    <ImageView
+        android:id="@+id/iv_giftHeader"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:scaleType="center"
+        android:src="@drawable/img_gift_bmw"
+        tools:ignore="ContentDescription" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:layout_marginLeft="12dp"
+        android:layout_toRightOf="@+id/iv_giftHeader" >
+
+        <TextView
+            android:id="@+id/tv_giftName"
+            style="@style/tv_blacktitle_style"
+            android:layout_width="wrap_content"
+            android:ellipsize="end"
+            android:maxEms="9"
+            android:singleLine="true"
+            android:text="@string/gift_name_normal" />
+
+        <TextView
+            android:id="@+id/tv_giftRemnants"
+            style="@style/tv_blacktitle_style"
+            android:layout_width="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="@string/gift_remnants_normal"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/tv_gold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:drawableLeft="@drawable/img_gold"
+            android:drawablePadding="3dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxEms="10"
+            android:singleLine="true"
+            android:textColor="@color/girl_red"
+            android:textSize="11sp" />
+
+        <!-- 魅力值 -->
+
+        <TextView
+            android:id="@+id/tv_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/tv_giftRemnants"
+            android:layout_alignParentBottom="true"
+            android:drawableLeft="@drawable/img_charm_black"
+            android:drawablePadding="3dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxEms="10"
+            android:singleLine="true"
+            android:textColor="@color/girl_red"
+            android:textSize="11sp" />
+
+        <Button
+            android:id="@+id/btn_buyGift"
+            style="@style/btn_small_white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:text="@string/buy"
+            android:textSize="12sp" />
+    </RelativeLayout>
+
+</RelativeLayout>

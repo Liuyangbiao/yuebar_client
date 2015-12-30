@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://robobinding.org/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_main"
+    android:orientation="vertical" >
+
+    <com.fullteem.yueba.widget.TopTitleView
+        android:id="@+id/top_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btn_sureJoin"
+        android:layout_below="@id/top_title"
+        android:layout_marginTop="6dp"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="156dp"
+                android:background="@drawable/bg_perssonal_summary"
+                android:orientation="vertical" >
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="85dp"
+                    android:orientation="horizontal" >
+
+                    <ImageView
+                        android:id="@+id/ivGroupHeader"
+                        android:scaleType="fitXY"
+                        android:layout_width="90dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/img_loading_empty_copy"
+                        android:contentDescription="@string/app_name" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="15dp"
+                        android:layout_toRightOf="@id/ivGroupHeader"
+                        android:paddingBottom="6dp"
+                        android:paddingTop="8dp" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:maxEms="20"
+                            android:singleLine="true"
+                            android:text="@string/usrname_normal"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/size_15"
+                            bind:text="{groupName}" />
+
+                        <!-- 群组距离 -->
+
+                        <TextView
+                            style="@style/GrayWords"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="20dp"
+                            bind:text="{groupDistance}" />
+
+                        <TextView
+                            style="@style/GrayWords"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="2dp"
+                            android:gravity="left"
+                            android:text="@string/group_peoples"
+                            android:textColor="#b9000000"
+                            bind:text="{groupPeoples}" />
+
+                        <com.fullteem.yueba.widget.AutoRollTextView
+                            style="@style/GrayWords"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginRight="2dp"
+                            android:gravity="left"
+                            android:text="@string/app_error_message"
+                            android:textColor="#b9000000"
+                            bind:text="{groupSignature}" />
+                    </RelativeLayout>
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.8dp"
+                    android:background="@drawable/bg_nearby_date_dividerline" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp" >
+
+                    <TextView
+                        style="@style/GrayWords"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/albumNone"
+                        android:textColor="#b9000000"
+                        bind:visibility="{albumNoneVisibility}" />
+
+                    <ImageView
+                        android:id="@+id/iv_arrowLeftAlbum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/left_arrow_pink"
+                        bind:visibility="{albumVisibility}" />
+
+                    <ImageView
+                        android:id="@+id/iv_arrowRightAlbum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/right_arrow_pink"
+                        bind:visibility="{albumVisibility}" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recyclerview_album"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="6dp"
+                        android:layout_marginLeft="3dp"
+                        android:layout_marginRight="3dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_toLeftOf="@id/iv_arrowRightAlbum"
+                        android:layout_toRightOf="@id/iv_arrowLeftAlbum"
+                        android:scrollbars="none"
+                        bind:visibility="{albumVisibility}" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_nearby_data_state"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="6dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingTop="6dp"
+                    android:weightSum="10" >
+
+                    <TextView
+                        style="@style/perssonal_tv_black_style"
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:gravity="right"
+                        android:text="@string/group_num" />
+
+                    <TextView
+                        style="@style/perssonal_tv_black_style"
+                        android:layout_width="0dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="8"
+                        android:gravity="left"
+                        bind:text="{groupNum}" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.8dp"
+                    android:background="@drawable/bg_nearby_date_dividerline" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="6dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingTop="6dp"
+                    android:weightSum="10" >
+
+                    <TextView
+                        style="@style/perssonal_tv_black_style"
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:gravity="right"
+                        android:text="@string/group_member" />
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="8"
+                        bind:visibility="{membersVisibility}" >
+
+                        <ImageView
+                            android:id="@+id/iv_arrowRightMembers"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/right_arrow_pink" />
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recyclerview_members"
+                            android:layout_width="match_parent"
+                            android:layout_height="26dp"
+                            android:layout_toLeftOf="@id/iv_arrowRightMembers"
+                            android:paddingBottom="0dp"
+                            android:paddingLeft="8dp"
+                            android:paddingRight="8dp"
+                            android:paddingTop="0dp"
+                            android:scrollbars="none" />
+                    </RelativeLayout>
+
+                    <TextView
+                        style="@style/GrayWords"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="8"
+                        android:gravity="center"
+                        android:text="@string/thisNone"
+                        android:textColor="#b9000000"
+                        bind:visibility="{membersNoneVisibility}" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.8dp"
+                    android:background="@drawable/bg_nearby_date_dividerline" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="6dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingTop="6dp"
+                    android:weightSum="10" >
+
+                    <TextView
+                        style="@style/perssonal_tv_black_style"
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:gravity="right"
+                        android:text="@string/group_location" />
+
+                    <TextView
+                        style="@style/perssonal_tv_black_style"
+                        android:layout_marginLeft="10dp"
+                        bind:text="{groupLocation}" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.8dp"
+                    android:background="@drawable/bg_nearby_date_dividerline" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="6dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingTop="6dp"
+                    android:weightSum="10"
+                    bind:onClick="onHarmast" >
+
+                    <TextView
+                        style="@style/perssonal_tv_black_style"
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:gravity="right"
+                        android:text="@string/group_harmast" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="8"
+                        android:gravity="center_vertical" >
+
+                        <TextView
+                            style="@style/perssonal_tv_black_style"
+                            android:layout_marginLeft="10dp"
+                            android:textColor="@color/girl_red"
+                            bind:text="{groupHarmast}" />
+
+                        <com.fullteem.yueba.widget.CircleImageView
+                            android:id="@+id/ivHarmastHeader"
+                            android:layout_width="23dp"
+                            android:layout_height="23dp"
+                            android:layout_marginLeft="5dp"
+                            android:background="@drawable/img_loading_default" />
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end|center_vertical"
+                            android:contentDescription="@string/app_name"
+                            android:scaleType="fitEnd"
+                            android:src="@drawable/img_arrow_right" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.8dp"
+                    android:background="@drawable/bg_nearby_date_dividerline" />
+
+                <TextView
+                    style="@style/perssonal_tv_black_style"
+                    android:layout_marginLeft="22dp"
+                    android:text="@string/group_introduction" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/etGroupIntroduction"
+                style="@style/perssonal_tv_black_style"
+                android:layout_width="match_parent"
+                android:background="@drawable/bg_nearby_datecontent"
+                android:enabled="false"
+                android:gravity="left"
+                android:lines="3"
+                android:paddingBottom="5dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="5dp"
+                android:singleLine="false"
+                bind:text="${groupIntroduction}" />
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btn_sureJoin"
+        style="@style/btn_bgBule2White_textWhite2Black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="12dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:text="@string/group_join"
+        android:textSize="@dimen/size_15"
+        android:textStyle="bold" />
+
+</RelativeLayout>

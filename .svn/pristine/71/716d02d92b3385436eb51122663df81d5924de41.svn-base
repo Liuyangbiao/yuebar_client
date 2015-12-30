@@ -1,0 +1,24 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <com.fullteem.yueba.widget.TopTitleView
+        android:id="@+id/toptile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.fullteem.yueba.widget.SwipeListView
+        android:id="@+id/chatList"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/toptile"
+        android:cacheColorHint="@color/transparent"
+        android:background="@drawable/date_item_content"
+        android:divider="@color/white"
+        android:layout_margin="12dp"
+        android:dividerHeight="0.0dp"
+        android:listSelector="@color/transparent" >
+    </com.fullteem.yueba.widget.SwipeListView>
+
+</RelativeLayout>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+
+    <Button
+        android:id="@+id/btn_friends"
+        style="@style/btn_nearby_style"
+        android:background="@drawable/btn_group_left_selected"
+        android:text="@string/friendslist_friends"
+        android:textColor="@color/btn_nearby_selected"
+        android:textSize="@dimen/btn_nearby_size" />
+
+    <Button
+        android:id="@+id/btn_group"
+        style="@style/btn_nearby_style"
+        android:background="@drawable/btn_group_right"
+        android:text="@string/friendslist_groups"
+        android:textColor="@color/btn_nearby_unselected"
+        android:textSize="@dimen/btn_nearby_size" />
+    
+
+</LinearLayout>

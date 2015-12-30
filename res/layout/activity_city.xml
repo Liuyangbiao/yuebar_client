@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_main"
+    android:orientation="vertical" >
+
+    <com.fullteem.yueba.widget.TopTitleView
+        android:id="@+id/top_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/size_5"
+        android:layout_marginTop="@dimen/size_5"
+        layout="@layout/search_box" />
+
+    <View style="@style/line_gray" />
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@android:color/white" >
+
+        <RelativeLayout
+            android:id="@+id/city_content_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white" >
+
+            <TextView
+                android:id="@+id/hot_city"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#F3F4F6"
+                android:gravity="left"
+                android:padding="10dp"
+                android:text="热门城市"
+                android:textColor="@color/gray"
+                android:textSize="20sp" />
+
+            <GridView
+                android:id="@+id/citys_list"
+                style="@style/base_listview_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/hot_city"
+                android:cacheColorHint="#00000000"
+                android:focusableInTouchMode="true"
+                android:gravity="center"
+                android:numColumns="3"
+                android:scrollbars="none" />
+
+            <include
+                android:id="@+id/citys_list_empty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                layout="@layout/base_load_empty_layout" />
+        </RelativeLayout>
+
+        <FrameLayout
+            android:id="@+id/search_content_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp" >
+
+            <ListView
+                android:id="@+id/search_list"
+                style="@style/base_listview_style"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:cacheColorHint="#00000000"
+                android:focusableInTouchMode="true"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/search_empty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10.0dip"
+                android:src="@drawable/biz_plugin_weather_selectcity_empty"
+                android:visibility="gone" />
+        </FrameLayout>
+    </FrameLayout>
+
+</LinearLayout>

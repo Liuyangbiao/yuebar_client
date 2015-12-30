@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" >
+
+    <com.fullteem.yueba.widget.CircleImageView
+        android:id="@+id/iv_userHeader"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/img_icon" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="12dp"
+        android:paddingBottom="2dp"
+        android:paddingTop="6dp" >
+
+        <TextView
+            android:id="@+id/tv_userName"
+            style="@style/red_common_title"
+            android:layout_centerVertical="true"
+            android:text="@string/name_normal" />
+
+        <TextView
+            android:id="@+id/tvSex"
+            style="@style/genderAndAge_girl"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@id/tv_userName"
+            android:singleLine="true"
+            android:text="@string/age_normal"
+            android:textColor="@color/white"
+            android:textSize="@dimen/size_12"
+            android:width="30dp" />
+    </RelativeLayout>
+
+</LinearLayout>

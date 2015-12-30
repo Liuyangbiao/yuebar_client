@@ -1,0 +1,48 @@
+package com.fullteem.yueba.model;
+
+import com.fullteem.yueba.engine.pay.PayUtil;
+import com.fullteem.yueba.util.EncryptUtil;
+
+public class PayContextModel{
+	private static final long serialVersionUID = 1L;
+	
+	private String seller;
+	private String partner;
+	private String privateKey;
+
+	public String getSeller() {
+		return seller;
+	}
+
+	public void setSeller(String seller) {
+		if (PayUtil.supportPayContextEncrypt){
+			this.seller = EncryptUtil.decrypt(seller);
+		}else {
+			this.seller = seller;
+		}
+	}
+
+	public String getPartner() {
+		return partner;
+	}
+
+	public void setPartner(String partner) {
+		if (PayUtil.supportPayContextEncrypt){
+			this.partner = EncryptUtil.decrypt(partner);
+		}else {
+			this.partner = partner;
+		}
+	}
+
+	public String getPrivateKey() {
+		return privateKey;
+	}
+
+	public void setPrivateKey(String privateKey) {
+		if (PayUtil.supportPayContextEncrypt){
+			this.privateKey = EncryptUtil.decrypt(privateKey);
+		}else {
+			this.privateKey = privateKey;
+		}
+	}
+}

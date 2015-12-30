@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <Button
+        android:id="@+id/btn_nearby_friends"
+        style="@style/btn_nearby_style"
+        android:background="@drawable/btn_group_left_selected"
+        android:text="@string/nearby_friends"
+        android:textColor="@color/btn_nearby_selected"
+        android:textSize="@dimen/btn_nearby_size" />
+
+    <Button
+        android:id="@+id/btn_nearby_pub"
+        style="@style/btn_nearby_style"
+        android:background="@drawable/btn_group_center"
+        android:text="@string/nearby_pub"
+        android:textColor="@color/btn_nearby_unselected"
+        android:textSize="@dimen/btn_nearby_size" />
+
+    <Button
+        android:id="@+id/btn_nearby_singer"
+        style="@style/btn_nearby_style"
+        android:background="@drawable/btn_group_center"
+        android:text="@string/nearby_singer"
+        android:textColor="@color/btn_nearby_unselected"
+        android:textSize="@dimen/btn_nearby_size" />
+
+    <Button
+        android:id="@+id/btn_nearby_date"
+        style="@style/btn_nearby_style"
+        android:background="@drawable/btn_group_right"
+        android:text="@string/nearby_date"
+        android:textColor="@color/btn_nearby_unselected"
+        android:textSize="@dimen/btn_nearby_size" />
+
+</LinearLayout>

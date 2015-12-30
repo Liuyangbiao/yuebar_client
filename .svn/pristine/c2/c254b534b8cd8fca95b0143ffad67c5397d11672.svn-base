@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_main"
+    android:orientation="vertical" >
+
+    <com.fullteem.yueba.widget.TopTitleView
+        android:id="@+id/top_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.fullteem.yueba.widget.OverScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp" >
+
+                <ImageView
+                    android:id="@+id/ivSelect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/down_arrow_icon" />
+
+                <Button
+                    android:id="@+id/btnSelect"
+                    style="@style/btn_option_item"
+                    android:drawableRight="@null"
+                    android:text="@string/date_select" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/llSelect"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone" >
+
+                <include
+                    android:id="@+id/lvLoadingSelect"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    layout="@layout/base_load_empty_layout" />
+
+                <com.fullteem.yueba.widget.ExpandListView
+                    android:id="@+id/lvSelect"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_nearby_datecontent"
+                    android:cacheColorHint="@color/transparent"
+                    android:divider="@drawable/bg_nearby_date_dividerline"
+                    android:dividerHeight="0.9dp"
+                    android:listSelector="@color/transparent"
+                    android:padding="0dp"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp" >
+
+                <ImageView
+                    android:id="@+id/ivBuy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/down_arrow_icon" />
+
+                <Button
+                    android:id="@+id/btnBuy"
+                    style="@style/btn_option_item"
+                    android:drawableRight="@null"
+                    android:text="@string/date_buy" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/llBuy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone" >
+
+                <include
+                    android:id="@+id/lvLoadingBuy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    layout="@layout/base_load_empty_layout" />
+
+                <com.fullteem.yueba.widget.ExpandListView
+                    android:id="@+id/lvBuy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_nearby_datecontent"
+                    android:cacheColorHint="@color/transparent"
+                    android:divider="@drawable/bg_nearby_date_dividerline"
+                    android:dividerHeight="0.9dp"
+                    android:listSelector="@color/transparent"
+                    android:padding="0dp"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </LinearLayout>
+    </com.fullteem.yueba.widget.OverScrollView>
+
+</LinearLayout>

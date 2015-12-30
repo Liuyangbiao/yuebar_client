@@ -1,0 +1,55 @@
+package com.fullteem.yueba.service;
+
+/**
+ * @className：ExampleService.java
+ * @author: lmt
+ * @Function: 示例，用以copy和参考
+ * @createDate: 2014-10-19 上午10:38:10
+ * @update:
+ */
+public class ExampleService {
+	// private String TAG = "ExampleService";
+	//
+	// private static CustomAsyncHttpClient httpClient;
+	// private static ExampleService mInstance;
+	//
+	// public static ExampleService getInstance(Context context) {
+	// httpClient = new CustomAsyncHttpClient(context);
+	// // 双重锁定
+	// if (mInstance == null) {
+	// synchronized (ExampleService.class) {
+	// if (mInstance == null) {
+	// mInstance = new ExampleService();
+	// }
+	// }
+	// }
+	// return mInstance;
+	// }
+	//
+	// public void postExampleRequest(String arg1, String arg2,
+	// CustomAsyncResponehandler handler) {
+	// RequestModel requestModel = new RequestModel();
+	// RequestParams params = new RequestParams();
+	// params.put("arg1", arg1);
+	// // // 是否加密
+	// // MD5 md5 = new MD5();
+	// // md5.Update(arg2);
+	// // arg2 = md5.asHex();
+	// params.put("arg2", arg2);
+	// requestModel.setParams(params);
+	// // 控制回调，部分特殊回调需要重写AsyncHttpResponseHandler对应方法自行处理
+	// requestModel.setCls(Example.class);
+	// requestModel.setShowDialog(true);
+	// requestModel.setShowErrorMessage(true);
+	// requestModel.setUrl(Urls.example_action);
+	// httpClient.post(requestModel, new CustomAsyncResponehandler() {
+	// public void onSuccess(ResponeModel baseModel) {
+	// super.onSuccess(baseModel);
+	// LogUtil.LogDebug(TAG, baseModel.getJson(), null);
+	// // 将返回结果封装在对象中:baseModel.setResult(result)
+	// // 而后在界面中获取返回结果对象：baseModel.getResult()
+	// // 复杂的返回结果需要另外做处理
+	// }
+	// });
+	// }
+}

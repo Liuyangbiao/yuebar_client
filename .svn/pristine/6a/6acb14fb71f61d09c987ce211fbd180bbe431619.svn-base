@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:bind="http://robobinding.org/android"
+    android:layout_width="match_parent"
+    android:layout_height="86dp"
+    android:descendantFocusability="blocksDescendants" >
+
+    <!--
+         <ImageView
+        android:id="@+id/iv_pubHeader"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/pub_icon"
+        android:scaleType="fitXY"
+        tools:ignore="ContentDescription" />
+    -->
+
+    <com.fullteem.yueba.widget.CircleImageView
+        android:id="@+id/iv_pubHeader"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/pub_icon"
+        tools:ignore="ContentDescription" >
+    </com.fullteem.yueba.widget.CircleImageView>
+
+    <ImageView
+        android:id="@+id/ivDataState"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:contentDescription="@string/app_name"
+        android:scaleType="fitStart"
+        android:src="@drawable/img_state_joined" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_marginLeft="12dp"
+        android:layout_toRightOf="@+id/iv_pubHeader" >
+
+        <RelativeLayout
+            android:id="@+id/topline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:gravity="top"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/tv_date_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:ellipsize="end"
+                android:ems="7"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:text="@string/date_title_normal"
+                android:textColor="@color/girl_red"
+                android:textSize="@dimen/size_15" />
+
+            <Button
+                android:id="@+id/btn_dateManage"
+                style="@style/btn_bgBule2White_textWhite2Black"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="3dp"
+                android:text="@string/hint_manage" />
+
+            <LinearLayout
+                android:id="@+id/llEnrolled"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dp"
+                android:layout_toRightOf="@+id/tv_date_title"
+                android:gravity="center_vertical|right"
+                android:orientation="horizontal"
+                android:visibility="gone" >
+
+                <TextView
+                    android:id="@+id/tv_sponsor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="7dp"
+                    android:text="heeh"
+                    android:textColor="@color/boy_blue" />
+
+                <com.fullteem.yueba.widget.CircleImageView
+                    android:id="@+id/iv_sponsor_header"
+                    android:layout_width="23dp"
+                    android:layout_height="23dp"
+                    android:background="@drawable/img_icon" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_pubname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/topline"
+            android:ellipsize="end"
+            android:ems="7"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:text="@string/name_pub_normal"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/size_14" />
+
+        <TextView
+            android:id="@+id/tv_time_show"
+            style="@style/GrayWords"
+            android:layout_below="@id/tv_pubname"
+            android:layout_marginTop="3dp"
+            android:text="@string/date_time"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_time"
+            style="@style/GrayWords"
+            android:layout_below="@id/tv_pubname"
+            android:layout_marginTop="4dp"
+            android:text="@string/date_time_normal" />
+
+        <LinearLayout
+            android:id="@+id/ll_attendpeoples"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_time"
+            android:layout_marginTop="3dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                style="@style/GrayWords"
+                android:text="@string/date_attendpeoples"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_attendpeoples"
+                style="@style/GrayWords"
+                android:maxLength="4"
+                android:text="@string/date_attendpeoples_normal"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_involved"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_time"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="3dp"
+            android:layout_toRightOf="@id/ll_attendpeoples"
+            android:orientation="horizontal" >
+
+            <TextView
+                style="@style/GrayWords"
+                android:text="@string/date_involved"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_involved"
+                style="@style/GrayWords"
+                android:maxLength="4"
+                android:text="@string/date_attendpeoples_normal"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- 期望 -->
+
+        <LinearLayout
+            android:id="@+id/ll_expect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/tv_time"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="4dp"
+            android:orientation="horizontal"
+            android:visibility="gone" >
+
+            <TextView
+                style="@style/GrayWords"
+                android:text="@string/date_expect"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_expect"
+                style="@style/GrayWords"
+                android:text="@string/date_expect_normal"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.8dp"
+            android:layout_below="@id/ll_involved"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/bg_nearby_date_line" />
+    </RelativeLayout>
+    <!-- 约会状态图标 -->
+
+</RelativeLayout>

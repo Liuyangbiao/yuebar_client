@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 红-白.9图片，按钮选择器 -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@drawable/btn_nearby_datedetails" android:state_pressed="false"/>
+    <item android:drawable="@drawable/btn_nearby_datedetails_pressed" android:state_pressed="true"/>
+    <item android:drawable="@drawable/btn_nearby_datedetails_pressed" android:state_enabled="false"/>
+
+</selector>

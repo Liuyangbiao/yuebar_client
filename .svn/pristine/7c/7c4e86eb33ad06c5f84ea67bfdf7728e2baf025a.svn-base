@@ -1,0 +1,24 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <com.fullteem.yueba.widget.XListView
+        android:id="@+id/listViewBarFriends"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:cacheColorHint="@color/transparent"
+        android:divider="@color/white"
+        android:dividerHeight="0.5dp"
+        android:focusable="false"
+        android:listSelector="@color/transparent" >
+    </com.fullteem.yueba.widget.XListView>
+
+    <include
+        android:id="@+id/lvLoading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        layout="@layout/base_load_empty_layout" />
+
+</RelativeLayout>

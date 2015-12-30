@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_popupwd_list"
+    android:orientation="vertical" >
+
+    <ListView
+        android:id="@+id/lv_popupwdList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:divider="#dadbd8"
+        android:dividerHeight="0.6dp"
+        android:fadingEdge="none"
+        android:listSelector="@drawable/popwindow_list_selector"
+        android:padding="3dp"
+        android:scrollbars="none" />
+
+</LinearLayout>

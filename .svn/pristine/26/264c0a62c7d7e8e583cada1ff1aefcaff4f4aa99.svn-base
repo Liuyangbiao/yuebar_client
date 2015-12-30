@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 约会管理 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://robobinding.org/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_main"
+    android:orientation="vertical" >
+
+    <com.fullteem.yueba.widget.TopTitleView
+        android:id="@+id/top_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.fullteem.yueba.widget.OverScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/firstline"
+                android:layout_width="fill_parent"
+                android:layout_height="90dp"
+                android:background="#90ffffff"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:id="@+id/iv_pubheader"
+                    android:layout_width="105dp"
+                    android:layout_height="90dp"
+                    android:background="@drawable/pub_icon" />
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp" >
+
+                    <!-- 标题 -->
+
+                    <RelativeLayout
+                        android:id="@+id/title_line"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="8dp" >
+
+                        <TextView
+                            android:id="@+id/pubName"
+                            style="@style/red_common_title"
+                            android:layout_centerVertical="true"
+                            android:text="@string/app_name"
+                            bind:text="{dateTitle}" />
+                    </RelativeLayout>
+
+                    <!-- 地址 -->
+
+                    <TextView
+                        android:id="@+id/tvAddress"
+                        style="@style/GrayWords"
+                        android:layout_centerVertical="true"
+                        android:drawableLeft="@drawable/site_icon"
+                        android:drawablePadding="15dp"
+                        android:text="@string/name_place_normal"
+                        bind:text="{dateLocation}" />
+
+                    <TextView
+                        style="@style/GrayWords"
+                        android:layout_below="@+id/tvAddress"
+                        android:layout_marginTop="10dp"
+                        android:drawableLeft="@drawable/time_img"
+                        android:drawablePadding="15dp"
+                        android:text="@string/date_time_normal"
+                        bind:text="{dateTime}" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="9dp"
+                android:background="@drawable/bg_nearby_data_state"
+                android:orientation="horizontal"
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp" >
+
+                <TextView
+                    style="@style/tv_blacktitle_style"
+                    android:layout_weight="8"
+                    android:gravity="right"
+                    android:text="@string/date_sponsor" />
+
+                <TextView
+                    style="@style/tv_blacktitle_style"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="2"
+                    bind:onClick="onSponsorClick"
+                    bind:text="{sponsor}" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/bg_nearbydate_details_dividerline" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_nearby_data_state"
+                android:orientation="horizontal"
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp" >
+
+                <TextView
+                    style="@style/tv_blacktitle_style"
+                    android:layout_weight="8"
+                    android:gravity="right"
+                    android:text="@string/date_fees" />
+
+                <TextView
+                    style="@style/tv_blacktitle_style"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="2"
+                    bind:text="{fees}" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/bg_nearbydate_details_dividerline" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_nearby_data_state"
+                android:orientation="horizontal"
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp" >
+
+                <TextView
+                    style="@style/tv_blacktitle_style"
+                    android:layout_width="match_parent"
+                    android:layout_weight="8"
+                    android:gravity="right"
+                    android:text="@string/date_describe" />
+
+                <TextView
+                    style="@style/tv_blacktitle_style"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="2" />
+            </LinearLayout>
+
+            <TextView
+                style="@style/GrayWords"
+                android:layout_width="match_parent"
+                android:background="@drawable/bg_nearby_datecontent"
+                android:gravity="left"
+                android:singleLine="false"
+                bind:text="{describe}" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/bg_nearby_data_state"
+                android:orientation="horizontal"
+                android:paddingBottom="5dp"
+                android:paddingTop="9dp" >
+
+                <TextView
+                    android:id="@+id/textView1"
+                    style="@style/tv_blacktitle_style"
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:text="@string/want_partake" />
+
+                <Button
+                    android:id="@+id/btn_stop"
+                    style="@style/btn_bgBule2White_textWhite2Black"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="5dp"
+                    android:text="@string/stop_enroll" 
+                    />
+
+                <Button
+                    android:id="@+id/btn_cancel"
+                    style="@style/btn_bgred2White_textWhite2Black"
+                    android:layout_marginRight="16dp"
+                    android:layout_toLeftOf="@id/btn_stop"
+                    android:text="@string/cancel_date" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/bg_nearbydate_details_dividerline" />
+
+            <com.fullteem.yueba.widget.ExpandListView
+                android:id="@+id/lv_wantPartake"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_nearby_data_state"
+                android:cacheColorHint="#000000"
+                android:divider="@drawable/bg_nearbydate_details_dividerline"
+                android:listSelector="@color/transparent"
+                android:dividerHeight="1dp" >
+            </com.fullteem.yueba.widget.ExpandListView>
+
+            <include
+                android:id="@+id/lvEmpty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                layout="@layout/base_load_empty_layout" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/bg_nearbydate_details_dividerline" />
+
+            <Button
+                android:id="@+id/btnLoadMore"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/content_light2dark_selector"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
+                android:text="@string/date_loadmore"
+                android:textColor="@color/girl_red" />
+        </LinearLayout>
+    </com.fullteem.yueba.widget.OverScrollView>
+
+</LinearLayout>

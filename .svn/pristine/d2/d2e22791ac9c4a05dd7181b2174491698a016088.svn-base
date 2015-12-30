@@ -1,0 +1,152 @@
+package com.fullteem.yueba.widget;
+
+import org.robobinding.ViewBinder;
+import org.robobinding.binder.BinderFactory;
+import org.robobinding.binder.BinderFactoryBuilder;
+
+import android.app.Activity;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.view.Gravity;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.PopupWindow;
+import android.widget.TextView;
+
+import com.fullteem.yueba.R;
+import com.fullteem.yueba.model.OrderPayModel;
+import com.fullteem.yueba.model.presentmodel.BuyGiftPopWPresentModel;
+
+/**
+ * @author jun
+ * @version 1.0.0
+ * @created 2014年12月30日&emsp;下午3:47:52
+ * @use 购买礼物Popupwindow
+ */
+public class BuyGiftPopWindow {
+	private View rootView;
+	private Activity mContext;
+	private PopupWindow mPopupWindow;
+	private BuyGiftPopWPresentModel presentModel;
+	private Button btnOrderNumsAdd, btnOrderNumsSub, btnSurePay;
+	private EventListener mListener;
+
+	public BuyGiftPopWindow(Activity context, BuyGiftPopWPresentModel presentModel) {
+		this.mContext = context;
+		this.presentModel = presentModel;
+		BinderFactory binderFactory = new BinderFactoryBuilder().build();
+		ViewBinder vb = binderFactory.createViewBinder(context, true);
+		this.rootView = vb.inflateAndBind(R.layout.popwindow_buy_gift, presentModel = presentModel == null ? new BuyGiftPopWPresentModel(mContext, new OrderPayModel())
+				: presentModel);
+		mPopupWindow = new PopupWindow(rootView, android.view.WindowManager.LayoutParams.MATCH_PARENT, android.view.WindowManager.LayoutParams.MATCH_PARENT);
+		mPopupWindow.setAnimationStyle(R.style.PopupAnimation);
+		mPopupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+		mPopupWindow.setTouchable(true);
+		mPopupWindow.setOutsideTouchable(true);
+		mPopupWindow.setFocusable(true);
+		initChlidViews();
+	}
+
+	private void initChlidViews() {
+		btnOrderNumsAdd = (Button) rootView.findViewById(R.id.btn_orderNumsAdd);
+		btnOrderNumsSub = (Button) rootView.findViewById(R.id.btn_orderNumsSub);
+		btnSurePay = (Button) rootView.findViewById(R.id.btn_surePay);
+		mListener = mListener == null ? new EventListener() : mListener;
+		btnOrderNumsAdd.setOnClickListener(mListener);
+		btnOrderNumsSub.setOnClickListener(mListener);
+		rootView.setOnClickListener(mListener);
+		rootView.findViewById(R.id.llContent).setOnClickListener(mListener);
+
+	}
+
+	public BuyGiftPopWPresentModel getModel() {
+		return presentModel;
+	}
+
+	/**
+	 * @param btnText
+	 *            null即使用xml指定的，""可起不显示作用
+	 * @param onClickListener
+	 */
+	public void setPayButton(String btnText, final OnPayButtonClickListener onClickListener) {
+		if (btnText != null)
+			btnSurePay.setText(btnText);
+		btnSurePay.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (onClickListener != null)
+					onClickListener.onPayClick(v, presentModel);
+			}
+		});
+	}
+
+	private class EventListener implements OnClickListener {
+		@Override
+		public void onClick(View v) {
+			if (v == btnOrderNumsAdd) {
+				int currentNums = Integer.valueOf(presentModel.getOrderPayModel().getOrderNums());
+				if (currentNums >= 99) {
+					presentModel.setErrorState(mContext.getString(R.string.hint_chouseAppropriateNums));
+					presentModel.setOrderNums("99");
+					return;
+				}
+				if (presentModel.getErrorStateVisibilly() == View.VISIBLE)
+					presentModel.setErrorState(null);
+				presentModel.setOrderNums(currentNums + 1 + "");
+			}
+
+			if (v == btnOrderNumsSub) {
+				int currentNum = Integer.valueOf(presentModel.getOrderPayModel().getOrderNums());
+				if (currentNum <= 1) {
+					presentModel.setErrorState(mContext.getString(R.string.hint_chouseAppropriateNums));
+					presentModel.setOrderNums(1 + "");
+					return;
+				}
+				if (presentModel.getErrorStateVisibilly() == View.VISIBLE)
+					presentModel.setErrorState(null);
+				presentModel.setOrderNums(currentNum - 1 + "");
+			}
+
+			if (v == rootView)
+				if (getPopupWindow().isShowing())
+					getPopupWindow().dismiss();
+		}
+	}
+
+	/**
+	 * @param title
+	 *            null即使用xml指定的，""可起不显示作用
+	 */
+	public void setTitle(String title) {
+		if (title == null)
+			return;
+		TextView tvContent = (TextView) rootView.findViewById(R.id.tvTitle);
+		tvContent.setText(title);
+	}
+
+	public PopupWindow getPopupWindow() {
+		return mPopupWindow;
+	}
+
+	public void showWindow() {
+		showWindow(null, null, null);
+	}
+
+	public void showWindow(String title, String btnContent, OnPayButtonClickListener onClickListener) {
+		setTitle(title);
+		setPayButton(btnContent, onClickListener);
+		if (presentModel.getErrorStateVisibilly() == View.VISIBLE)
+			presentModel.setErrorState(null);
+		mPopupWindow.showAtLocation(mContext.getWindow().getDecorView(), Gravity.CENTER, 0, 0);
+	}
+
+	public void showWindow(OnPayButtonClickListener onClickListener) {
+		showWindow(null, null, onClickListener);
+	}
+
+	public interface OnPayButtonClickListener {
+		void onPayClick(View v, BuyGiftPopWPresentModel presentModel);
+	}
+
+}

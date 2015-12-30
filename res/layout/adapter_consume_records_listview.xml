@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="8dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="6dp" >
+
+    <TextView
+        android:id="@+id/tv_consumeDate"
+        style="@style/GrayWords"
+        android:singleLine="true" />
+
+    <TextView
+        android:id="@+id/tv_consumeContent"
+        style="@style/tv_blacktitle_style"
+        android:layout_marginTop="6dp"
+        android:singleLine="true"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+</LinearLayout>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 套餐界面 -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants"
+    android:orientation="vertical"
+    android:paddingBottom="8dp"
+    android:paddingLeft="3dp"
+    android:paddingRight="3dp"
+    android:paddingTop="8dp" >
+
+    <TextView
+        android:id="@+id/tv_packageName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/ivPackageHeader"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/size_13"
+        android:textStyle="bold" />
+
+    <com.fullteem.yueba.widget.AutoRollTextView
+        android:id="@+id/tv_packageCOntent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/tv_packageName"
+        android:layout_below="@id/tv_packageName"
+        android:layout_marginTop="8dp"
+        android:paddingRight="2dp"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/size_12" />
+
+    <TextView
+        android:id="@+id/tv_packagePrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/tv_packageName"
+        android:layout_below="@id/tv_packageCOntent"
+        android:layout_marginTop="6dp"
+        android:paddingRight="2dp"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/size_12" />
+
+    <com.fullteem.yueba.widget.RoundAngleImageView
+        android:id="@+id/ivPackageHeader"
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/tv_packagePrice"
+        android:layout_alignTop="@id/tv_packageName"
+        android:background="@drawable/date_item_content"
+        android:scaleType="fitXY"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/btn_buy"
+        style="@style/btn_bgBule2White_textWhite2Black"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/tv_packageCOntent"
+        android:layout_gravity="right"
+        android:layout_marginRight="18dp"
+        android:layout_marginTop="4dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:text="@string/buy" />
+
+</RelativeLayout>

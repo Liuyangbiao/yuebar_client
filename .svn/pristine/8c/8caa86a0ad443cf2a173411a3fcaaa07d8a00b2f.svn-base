@@ -1,0 +1,34 @@
+package com.fullteem.yueba.service;
+
+import java.io.Serializable;
+
+import com.fullteem.yueba.model.CommonModel;
+
+public class ServerHostModel extends CommonModel implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	private ServerHostDataModel result;
+
+	public ServerHostDataModel getResult() {
+		return result;
+	}
+
+	public void setResult(ServerHostDataModel result) {
+		this.result = result;
+	}
+
+	class ServerHostDataModel {
+
+		private String host;
+
+		public String getHost() {
+			return host;
+		}
+
+		public void setHost(String host) {
+			this.host = host;
+		}
+
+	}
+
+}

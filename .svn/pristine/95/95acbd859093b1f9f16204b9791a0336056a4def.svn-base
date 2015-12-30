@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="6dp"
+    android:paddingLeft="12dp"
+    android:paddingRight="12dp"
+    android:paddingTop="8dp" >
+
+    <!-- 视频简介 -->
+
+    <com.fullteem.yueba.widget.AutoRollTextView
+        android:id="@+id/tv_videoIntroduction"
+        style="@style/GrayWords"
+        android:layout_width="match_parent"
+        android:gravity="left"
+        android:text=""
+        android:textColor="#b9000000" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        
+             <com.fullteem.yueba.app.singer.VideoPlayerView
+            android:id="@+id/view_videoPlay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp" />
+        
+
+
+        
+            android:layout_alignBottom="@id/view_videoPlay"
+            android:layout_alignTop="@id/view_videoPlay"
+        
+
+        <ImageView
+            android:id="@+id/iv_videoBg"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/img_loading_default_copy" />
+    </RelativeLayout>
+
+    
+         <Button
+        android:id="@+id/btn_playAndPause"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/btn_play" />
+    
+
+</LinearLayout>

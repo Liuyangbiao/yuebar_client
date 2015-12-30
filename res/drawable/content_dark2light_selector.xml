@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 内容背景选择器，暗-亮 -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@drawable/bg_nearby_data_state" android:state_pressed="true"/>
+    <item android:drawable="@drawable/bg_nearby_data_state" android:state_focused="true"/>
+    <item android:drawable="@drawable/bg_nearby_data_state" android:state_enabled="true"/>
+    <item android:drawable="@drawable/bg_nearby_data_state" android:state_enabled="false"/>
+    <item android:drawable="@drawable/bg_nearby_data_state" android:state_selected="true"/>
+    <item android:drawable="@drawable/bg_nearby_datecontent"/>
+
+</selector>
