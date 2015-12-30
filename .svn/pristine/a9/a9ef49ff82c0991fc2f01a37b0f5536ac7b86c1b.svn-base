@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- 按钮管理内容背景选择器，亮-暗 -->
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <item android:drawable="@drawable/content_top_bg" android:state_pressed="true"/>
-    <item android:drawable="@drawable/date_item_content"/>
-
-</selector>

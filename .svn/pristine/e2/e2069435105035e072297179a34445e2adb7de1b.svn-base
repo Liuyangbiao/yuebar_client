@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<lint>
-    <issue id="MissingPrefix" severity="ignore" />
-    <issue id="UselessParent">
-        <ignore path="res/layout/top_nearby_date_right.xml" />
-    </issue>
-    <issue id="ValidFragment" severity="ignore" />
-</lint>
